@@ -1,0 +1,20 @@
+spring:
+  #Allow Spring to spot put/delete requests from the html forms
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  main:
+    #Turn off the logo
+    banner-mode: off
+  #Set database connection properties
+  datasource:
+    url: jdbc:mysql://localhost:3306/unihub
+    username: root
+    password: Kenan@sql#16
+  #Add actuators
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
