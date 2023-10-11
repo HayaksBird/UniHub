@@ -2,12 +2,10 @@ const winston = require('winston');
 const { createLogger, format, transports } = winston;
 const { combine, timestamp, label, printf } = format;
 
-// Define log format
 const logFormat = printf(({ timestamp, level, message, label, meta }) => {
   return `${timestamp} ${label ? `[${label}]` : ''} [${level}] ${message} ${meta ? JSON.stringify(meta) : ''}`;
 });
 
-// Create a logger instance
 const logger = createLogger({
   level: 'info',
   format: combine(
