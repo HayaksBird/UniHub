@@ -1,9 +1,11 @@
-package online.unihub.backend.service;
+package online.unihub.backend.app.service;
 
-import online.unihub.backend.dao.ProfessorRepository;
-import online.unihub.backend.entity.Professor;
+import online.unihub.backend.app.dao.ProfessorRepository;
+import online.unihub.backend.app.entity.Professor;
 import online.unihub.backend.exception.ItemNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProfessorService {
@@ -20,6 +22,11 @@ public class ProfessorService {
 
         if (professor.isPresent()) return professor.get();
         throw new ItemNotFoundException(Professor.class, id);
+    }
+
+
+    public List<Professor> getAllProfessors() {
+        return professorRepository.findAll();
     }
 
 

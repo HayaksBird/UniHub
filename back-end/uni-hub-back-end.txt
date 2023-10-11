@@ -1,0 +1,62 @@
+*********
+STARTED THE APPLICATION
+2023-10-11 21:42:05.196
+*********
+
+
+
+*********
+Method: GET
+Endpoint: /test/professors/2
+Timestamp: 2023-10-11 21:42:20.39
+*********
+
+****   ERROR   ****
+*********
+Error: An item class online.unihub.backend.app.entity.Professor with id 1 does not exist!
+Timestamp: 2023-10-11 21:42:24.196
+*********
+
+*********
+Method: GET
+Endpoint: /test/professors/1
+Timestamp: 2023-10-11 21:42:24.219
+*********
+
+*********
+Method: GET
+Endpoint: /test/professors/
+Timestamp: 2023-10-11 21:42:27.299
+*********
+
+*********
+Method: GET
+Endpoint: /test/professors
+Timestamp: 2023-10-11 21:42:32.672
+*********
+
+*********
+Method: DELETE
+Endpoint: /test/professors/6
+Timestamp: 2023-10-11 21:42:43.034
+*********
+
+*********
+Method: GET
+Endpoint: /test/professors
+Timestamp: 2023-10-11 21:42:46.143
+*********
+
+*********
+Method: POST
+Endpoint: /test/professors
+Timestamp: 2023-10-11 21:42:51.57
+*********
+
+*********
+ENDED THE APPLICATION
+2023-10-11 21:42:54.676
+*********
+
+
+

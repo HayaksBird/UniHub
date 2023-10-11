@@ -1,4 +1,4 @@
-package online.unihub.backend.entity;
+package online.unihub.backend.app.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
