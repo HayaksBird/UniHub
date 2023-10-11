@@ -30,3 +30,17 @@ CREATE TABLE IF NOT EXISTS review_table (
   FOREIGN KEY (user_id) REFERENCES user_table(id)
 );
 
+INSERT INTO professor_table (full_name, class, university, photo_reference)
+VALUES
+  ('Professor 1', 'math203', 'Koc University', 'default'),
+  ('Professor 2', 'turk201', 'Koc University', 'default'),
+  ('Professor 3', 'comp100', 'Koc University', 'default');
+
+INSERT INTO review_table (prof_id, review_text, rating, user_id)
+VALUES
+  (1, 'Great professor!', 5, 1),
+  (2, 'Average professor.', 3, 2),
+  (3, 'Excellent teacher!', 5, 3);
+
+
+
