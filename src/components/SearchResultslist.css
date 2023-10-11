@@ -5,7 +5,7 @@
     flex-direction: column;
     border-radius: 10px;
     margin-top: .5rem;
-    max-height: 300px;
+    max-height: 200px;
     min-width: 350px;
     overflow-y: auto;
     scroll-behavior: smooth;

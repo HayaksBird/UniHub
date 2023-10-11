@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const Home = () => {
     const [results, setResults] = useState<any[]>([]);
+    
   return (
       <div className="Home">
         <NavBar />
