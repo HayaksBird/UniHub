@@ -1,0 +1,73 @@
+.Home {
+    background: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.meet-page{
+    height: 60vh;
+    width: 98%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-position: center;
+    background-size: cover;
+    overflow: visible;
+    background: linear-gradient(0deg, rgba(21, 21, 21, 0.7), rgba(21, 21, 21, 0.7)), url('./assets/imgs/man-reading-book.ec0041cf.jpeg');
+    background-position: center;
+    background-size: cover;
+    border-radius: 20px;
+    box-shadow: 0 0 8px #1f1f1f;
+}
+
+.search-bar-container {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 350px;
+    margin-top: calc(30vh - 172.8px / 2);
+}
+
+h1{
+    color: white;
+}
+
+p{
+    margin-top: 0.5rem;
+    color: white;
+}
+
+.txt-wrapper {
+    background: transparent;
+    backdrop-filter: blur(20px);
+    width: 100%;
+    min-height: 140px;
+    border-radius: 10px;
+    box-shadow:  0 0 8px #1f1f1f;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.infop{
+    width: 100%;
+    height: 20vh;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: #921324;
+    border-radius: 10px;
+}
+  
+::-webkit-scrollbar-track{
+    background: #eee;
+}
+
