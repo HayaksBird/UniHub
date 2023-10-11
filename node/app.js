@@ -48,7 +48,6 @@ app.use((req, res, next) => {
 
 app.set('view engine', 'ejs');
 app.use(cors());
-app.options('*', cors());
 app.use(session({
   secret: process.env.SECRET,
   resave: true,
