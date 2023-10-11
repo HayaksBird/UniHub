@@ -36,7 +36,6 @@ const addUser = async (username, email, password, salt) => {
 
 const findUserByUsername = async(username) => {
   const [user] = await pool.query(`SELECT * FROM user_table WHERE username = ?`, [username]);
-  console.log(`SELECT * FROM user_table WHERE username = ?`, [username])
   return user;
 }
 
