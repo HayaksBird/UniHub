@@ -1,0 +1,234 @@
+*********
+STARTED THE APPLICATION
+2023-10-12 16:44:31.687
+*********
+
+*********
+Method: GET
+Endpoint: /professors
+Timestamp: 2023-10-12 16:45:04.539
+*********
+
+*********
+Method: GET
+Endpoint: /professors2
+Timestamp: 2023-10-12 16:45:08.719
+*********
+
+*********
+Method: GET
+Endpoint: /professors/2
+Timestamp: 2023-10-12 16:45:11.388
+*********
+
+*********
+Method: GET
+Endpoint: /professors/4
+Timestamp: 2023-10-12 16:45:15.7
+*********
+
+****   ERROR   ****
+*********
+Error: An item class online.unihub.backend.app.entity.Professor with id 4 does not exist!
+Timestamp: 2023-10-12 16:45:15.726
+*********
+
+*********
+Method: DELETE
+Endpoint: /professors/2
+Timestamp: 2023-10-12 16:45:19.577
+*********
+
+*********
+Method: GET
+Endpoint: /professors
+Timestamp: 2023-10-12 16:45:24.278
+*********
+
+*********
+Method: POST
+Endpoint: /professors
+Timestamp: 2023-10-12 16:45:35.949
+*********
+
+*********
+Method: GET
+Endpoint: /professors
+Timestamp: 2023-10-12 16:45:39.433
+*********
+
+*********
+Method: POST
+Endpoint: /professors
+Timestamp: 2023-10-12 16:45:55.787
+*********
+
+*********
+Method: GET
+Endpoint: /professors
+Timestamp: 2023-10-12 16:45:59.631
+*********
+
+*********
+Method: DELETE
+Endpoint: /professors/5
+Timestamp: 2023-10-12 16:46:07.164
+*********
+
+*********
+Method: GET
+Endpoint: /professors
+Timestamp: 2023-10-12 16:46:09.984
+*********
+
+*********
+ENDED THE APPLICATION
+2023-10-12 16:46:51.056
+*********
+
+
+
+*********
+STARTED THE APPLICATION
+2023-10-12 16:48:28.021
+*********
+
+*********
+Method: GET
+Endpoint: /reviews
+Timestamp: 2023-10-12 16:48:59.135
+*********
+
+*********
+Method: GET
+Endpoint: /reviews/3
+Timestamp: 2023-10-12 16:49:07.12
+*********
+
+*********
+Method: GET
+Endpoint: /reviews/3
+Timestamp: 2023-10-12 16:49:09.492
+*********
+
+*********
+Method: GET
+Endpoint: /reviews/2
+Timestamp: 2023-10-12 16:49:13.69
+*********
+
+****   ERROR   ****
+*********
+Error: An item class online.unihub.backend.app.entity.Review with id 2 does not exist!
+Timestamp: 2023-10-12 16:49:13.716
+*********
+
+*********
+Method: DELETE
+Endpoint: /professors/1
+Timestamp: 2023-10-12 16:49:18.567
+*********
+
+*********
+Method: GET
+Endpoint: /reviews
+Timestamp: 2023-10-12 16:49:23.228
+*********
+
+*********
+Method: POST
+Endpoint: /reviews
+Timestamp: 2023-10-12 16:50:01.032
+*********
+
+*********
+Method: GET
+Endpoint: /reviews
+Timestamp: 2023-10-12 16:50:06.868
+*********
+
+*********
+ENDED THE APPLICATION
+2023-10-12 16:52:59.593
+*********
+
+
+
+*********
+STARTED THE APPLICATION
+2023-10-12 17:01:03.487
+*********
+
+*********
+Method: GET
+Endpoint: /professors
+Timestamp: 2023-10-12 17:02:36.021
+*********
+
+*********
+Method: GET
+Endpoint: /reviews
+Timestamp: 2023-10-12 17:02:48.064
+*********
+
+****   ERROR   ****
+*********
+Error: Null value was assigned to a property [class online.unihub.backend.app.entity.Review.profId] of primitive type : `online.unihub.backend.app.entity.Review.profId` (setter)
+Timestamp: 2023-10-12 17:02:48.115
+*********
+
+*********
+ENDED THE APPLICATION
+2023-10-12 17:02:55.992
+*********
+
+
+
+*********
+STARTED THE APPLICATION
+2023-10-12 17:03:17.105
+*********
+
+*********
+Method: GET
+Endpoint: /professors
+Timestamp: 2023-10-12 17:03:50.784
+*********
+
+*********
+Method: GET
+Endpoint: /reviews
+Timestamp: 2023-10-12 17:03:57.44
+*********
+
+*********
+Method: GET
+Endpoint: /professors
+Timestamp: 2023-10-12 17:04:10.341
+*********
+
+*********
+Method: DELETE
+Endpoint: /professors/2
+Timestamp: 2023-10-12 17:04:18.903
+*********
+
+*********
+Method: GET
+Endpoint: /professors
+Timestamp: 2023-10-12 17:04:22.062
+*********
+
+*********
+Method: GET
+Endpoint: /reviews
+Timestamp: 2023-10-12 17:04:26.112
+*********
+
+*********
+ENDED THE APPLICATION
+2023-10-12 17:04:28.82
+*********
+
+
+

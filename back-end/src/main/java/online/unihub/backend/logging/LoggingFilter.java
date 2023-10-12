@@ -25,9 +25,8 @@ public class LoggingFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain filterChain)
                                     throws ServletException, IOException {
 
-        filterChain.doFilter(request, response);
-
-        //Log after the controller method execution
+        //Log user's trace
         loggingService.add(request.getMethod(), request.getRequestURI());
+        filterChain.doFilter(request, response);
     }
 }

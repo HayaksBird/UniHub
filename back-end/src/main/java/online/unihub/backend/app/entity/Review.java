@@ -15,21 +15,13 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "review_table")
 public class Review {
-    /*
-    review_id INT AUTO_INCREMENT PRIMARY KEY,
-  prof_id INT,
-  review_text TEXT,
-  rating INT,
-  user_id INT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (prof_id) REFERENCES professor_table(id),
-  FOREIGN KEY (user_id) REFERENCES user_table(id)
-     */
-
     @Id
-    @Column(name = "id")
+    @Column(name = "review_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "prof_id")
+    private int profId;
 
     @Column(name = "review_text")
     private String reviewText;

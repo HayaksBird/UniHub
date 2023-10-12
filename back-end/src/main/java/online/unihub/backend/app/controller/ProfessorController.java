@@ -8,38 +8,38 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/test")
+@RequestMapping("/professors")
 @RestController
-public class TestController {
+public class ProfessorController {
     private final ProfessorService professorService;
 
 
     //CONSTRUCTORS
-    public TestController(ProfessorService professorService) {
+    public ProfessorController(ProfessorService professorService) {
         this.professorService = professorService;
     }
 
 
-    @PostMapping("/professors")
+    @PostMapping("")
     public ResponseEntity<Void> addProfessor(@RequestBody Professor professor) {
         professorService.addProfessor(professor);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 
-    @GetMapping("/professors/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Professor> getProfessor(@PathVariable int id) {
         return new ResponseEntity<>(professorService.getProfessor(id), HttpStatus.OK);
     }
 
 
-    @GetMapping("/professors")
+    @GetMapping("")
     public ResponseEntity<List<Professor>> getProfessors() {
         return new ResponseEntity<>(professorService.getAllProfessors(), HttpStatus.OK);
     }
 
 
-    @DeleteMapping("/professors/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProfessor(@PathVariable int id) {
         professorService.deleteProfessor(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

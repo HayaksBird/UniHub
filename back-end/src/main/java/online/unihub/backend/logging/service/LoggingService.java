@@ -19,14 +19,14 @@ public class LoggingService {
 
     public LoggingService(ResourceLoader resourceLoader) throws LoggingException {
         try {
-            FileWriter fileWriter = new FileWriter(Paths.get("uni-hub-back-end.txt").toAbsolutePath().toString(), true);
+            FileWriter fileWriter = new FileWriter(Paths.get("back-end-log.txt").toAbsolutePath().toString(), true);
             bufferedWriter  = new BufferedWriter(fileWriter);
 
             bufferedWriter.write(String.format(
                     "*********%n" +
                     "STARTED THE APPLICATION%n" +
                     "%s%n" +
-                    "*********%n%n%n%n",
+                    "*********%n%n",
                     new Timestamp(System.currentTimeMillis())
             ));
         } catch (IOException e) {

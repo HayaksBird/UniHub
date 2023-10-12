@@ -1,10 +1,13 @@
 package online.unihub.backend.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -29,4 +32,11 @@ public class Professor {
 
     @Column(name = "photo_reference")
     private String photoReference;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.REMOVE,
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "prof_id",
+            referencedColumnName = "id")
+    private List<Review> reviews;
 }
