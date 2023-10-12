@@ -3,7 +3,6 @@ package online.unihub.backend.logging.service;
 import jakarta.annotation.PreDestroy;
 import online.unihub.backend.exception.ErrorResponse;
 import online.unihub.backend.exception.LoggingException;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
@@ -17,16 +16,16 @@ public class LoggingService {
     private final BufferedWriter bufferedWriter;
 
 
-    public LoggingService(ResourceLoader resourceLoader) throws LoggingException {
+    public LoggingService() throws LoggingException {
         try {
             FileWriter fileWriter = new FileWriter(Paths.get("back-end-log.txt").toAbsolutePath().toString(), true);
             bufferedWriter  = new BufferedWriter(fileWriter);
 
             bufferedWriter.write(String.format(
-                    "*********%n" +
+                    "************************************************************%n" +
                     "STARTED THE APPLICATION%n" +
                     "%s%n" +
-                    "*********%n%n",
+                    "************************************************************%n%n",
                     new Timestamp(System.currentTimeMillis())
             ));
         } catch (IOException e) {
