@@ -1,6 +1,8 @@
 const { addUser, isUserUnique, findUserByUsername, findUserById, getAllUsers, getAllProfessors } = require('./db/database')
 const { genSaltAndHash, checkAuthenticated, checkNotAuthenticated } = require('./controllers/controller')
 const searchProfessors = require('./controllers/searchController')
+const professorRoute = require('./routes/professorRoute')
+const reviewRoute = require('./routes/reviewRoute')
 const passport = require('./auth/passport-config')
 const signupRoute = require('./auth/signupRoute')
 const loginRoute = require('./auth/loginRoute')
@@ -61,12 +63,14 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(log('dev'));
-app.use(bodyParser.json());
-app.use(cookieParser());
+app.use(bodyParser.json())
+app.use(cookieParser())
 //app.use(errorHandler);
-app.use('/signup', signupRoute);
+app.use('/signup', signupRoute)
 app.use('/login', loginRoute)
-app.use(cookieParser(process.env.SECRET));
+app.use('/professors', professorRoute)
+app.use('/reviews', reviewRoute)
+app.use(cookieParser(process.env.SECRET))
 
 app.use((err, req, res, next) => {
   const logData = {

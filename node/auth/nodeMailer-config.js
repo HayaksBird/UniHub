@@ -26,4 +26,4 @@ const sendEmail = (toEmail, text) => {
     });
 }
 
-module.exports = { sendEmail }
+module.exports = sendEmail
