@@ -26,6 +26,4 @@ const sendEmail = (toEmail, text) => {
     });
 }
 
-sendEmail('mikashamshidov1@gmail.com', "poop")
-
 module.exports = { sendEmail }

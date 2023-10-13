@@ -20,8 +20,6 @@ router.post('/', (req, res, next) => {
 //   res.render('./index.ejs')
 // })
 
-const { sendEmail } = require('../auth/nodeMailer-config')
-send
 
 
 module.exports = router
