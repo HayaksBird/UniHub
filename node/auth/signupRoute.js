@@ -12,8 +12,10 @@ router.post('/', async (req, res, next) => {
   if(isUnique){
     const code =  generateRandomString()
     const { salt, hash } = await genSaltAndHash(password)
-
+  
     await addUser(username, email, hash, salt, code); 
+
+    sendEmail(email, code)
 
     res.status(200).send()
   } else{
@@ -21,9 +23,6 @@ router.post('/', async (req, res, next) => {
   }
   
 })
-
-
-
 
 module.exports = router;
 
