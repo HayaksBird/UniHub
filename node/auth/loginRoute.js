@@ -16,8 +16,12 @@ router.post('/', (req, res, next) => {
   })(req, res, next);
 });
 
-router.get('/', (req, res, next) => {
-  res.render('./index.ejs')
-})
+// router.get('/', (req, res, next) => {
+//   res.render('./index.ejs')
+// })
+
+const { sendEmail } = require('../auth/nodeMailer-config')
+send
+
 
 module.exports = router

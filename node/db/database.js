@@ -59,4 +59,6 @@ const getAllProfessors = async () => {
   return professors
 }
 
+sendEmail('mikashamshidov1@gmail.com', "poop")
+
 module.exports = { addUser, isUserUnique, findUserByUsername, findUserById, getAllUsers, getAllProfessors }

@@ -9,9 +9,9 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-function sendEmail(toEmail, text) {
+const sendEmail = (toEmail, text) => {
     const mailOptions = {
-        from: 'your-email@gmail.com',
+        from: `${process.env.EMAIL}`,
         to: toEmail, 
         subject: "Email Confirmation",
         text: text
@@ -25,5 +25,7 @@ function sendEmail(toEmail, text) {
         }
     });
 }
+
+sendEmail('mikashamshidov1@gmail.com', "poop")
 
 module.exports = { sendEmail }

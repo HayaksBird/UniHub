@@ -9,8 +9,7 @@ router.post('/', async (req, res, next) => {
   const isUnique = await isUserUnique(username, email);
   if(isUnique){
     const { salt, hash } = await genSaltAndHash(password)
-    await addUser(username, email, hash, salt);
-    
+    await addUser(username, email, hash, salt); 
     res.status(200).send()
   } else{
     res.status(401).send()
