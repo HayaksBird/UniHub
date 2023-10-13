@@ -20,9 +20,10 @@ router.delete('/', async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
+router.get('/:professorId', async (req, res) => {
   try {
-    const response = await axios.get(`${process.env.SECOND_SERVER}/professors`, { params: req.query });
+    const professorId = req.params.professorId; 
+    const response = await axios.get(`${process.env.SECOND_SERVER}/professors/${professorId}`);
     res.status(response.status).json(response.data);
   } catch (error) {
     res.status(error.response.status).json(error.response.data);
