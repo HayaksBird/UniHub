@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS user_table (
   password VARCHAR(255) NOT NULL,
   salt VARCHAR(255) NOT NULL,
   hash_algorithm VARCHAR(255) NOT NULL,
-  email_confirmed BOOLEAN
+  confirmationCode VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS professor_table (
@@ -42,7 +42,7 @@ VALUES
   (2, 'Average professor.', 3, 2),
   (3, 'Excellent teacher!', 5, 3);
 
-INSERT INTO user_table (id, username, email, password, salt, hash_algorithm, email_confirmed)
+INSERT INTO user_table (id, username, email, password, salt, hash_algorithm, confirmationCode)
 VALUES 
   (1, 'Mikhail', 'poop@gmail.com', '$2b$06$ZW/ce/UUES3PEOOKckwGkO/5nGabnVibEncePKPvwmu4Ic4GSBnzW', '$2b$06$ZW/ce/UUES3PEOOKckwGkO', 'bcrypt', NULL);
   (2, 'XT3RM1NATOR', 'mikashamshidov1@gmail.com', '$2b$06$fuOCdUEgcpMy8uvnjbCNru3rT6abNdEFaJAq54H4V/hGOjB3JGUDi', '$2b$06$fuOCdUEgcpMy8uvnjbCNru', 'bcrypt', NULL);
