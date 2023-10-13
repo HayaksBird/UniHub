@@ -8,17 +8,28 @@ const genSaltAndHash = async (password) => {
 
 const checkAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
-    return next()
+    res.status(403).send()
   }
-  res.redirect('/login')
+  res.status(200).send()
 }
 
 const checkNotAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
-    return res.redirect('/')
+    return res.status(200).send()
   }
-  next()
+  res.status(403).send()
 }
 
+const generateRandomString = () => {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let randomString = '';
 
-module.exports = { genSaltAndHash, checkAuthenticated, checkNotAuthenticated }
+  for (let i = 0; i < 6; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    randomString += characters.charAt(randomIndex);
+  }
+
+  return randomString;
+}
+
+module.exports = { genSaltAndHash, checkAuthenticated, checkNotAuthenticated, generateRandomString }

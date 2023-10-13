@@ -1,4 +1,6 @@
 const mysql = require('mysql2/promise');
+const { generateRandomString } = require('../controllers/controller')
+const { sendEmail } = require('../auth/nodeMailer-config')
 require('dotenv').config();
 
 const pool = mysql.createPool({
@@ -22,7 +24,9 @@ const isUserUnique = async (username, email) => {
 
 const addUser = async (username, email, password, salt) => {
   try {
-    const [result] = await pool.query('INSERT INTO user_table (username, email, password, salt, hash_algorithm) VALUES (?, ?, ?, ?, ?)', [username, email, password, salt, "bcrypt"]);
+    const code =  generateRandomString()
+    const [result] = await pool.query('INSERT INTO user_table (username, email, password, salt, hash_algorithm, confirmationCode) VALUES (?, ?, ?, ?, ?, ?)', [username, email, password, salt, "bcrypt", code]);
+    sendEmail(email, code)
     console.log(result)
     if (result.affectedRows === 1) {
       console.log('User added successfully');
@@ -46,6 +50,7 @@ const findUserById = async(id) => {
 
 const getAllUsers = async () => {
   const [users] = await pool.query(`SELECT * FROM user_table`)
+  console.log(users)
   return users
 }
 
