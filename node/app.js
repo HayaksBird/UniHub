@@ -1,4 +1,4 @@
-const { addUser, isUserUnique, findUserByUsername, findUserById, getAllUsers, getAllProfessors } = require('./db/database')
+const { addUser, isUserUnique, findUserByUsername, findUserById, getAllUsers, getAllProfessors, sessionStore } = require('./db/database')
 const { genSaltAndHash, checkAuthenticated, checkNotAuthenticated } = require('./controllers/controller')
 const searchProfessors = require('./controllers/searchController')
 const professorRoute = require('./routes/professorRoute')
@@ -11,10 +11,8 @@ const errorHandler = require('errorhandler')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const logger = require('./log/logger')
-const store = session.MemoryStore()
 const express = require('express')
 const log = require('morgan');
-const path = require('path')
 const cors = require('cors')
 const app = express()
 require('dotenv').config()
@@ -57,7 +55,7 @@ app.use(session({
   cookie: {
       maxAge: 1000 * 60 * 60 * 24 // 86400000 1 day
   },
-  store
+  store: sessionStore
 }));
 
 app.use(passport.initialize())

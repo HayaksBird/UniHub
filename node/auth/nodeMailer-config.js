@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-const sendEmail = (toEmail, text) => {
+const sendEmail = async (toEmail, text) => {
     const mailOptions = {
         from: `${process.env.EMAIL}`,
         to: toEmail, 
@@ -28,8 +28,6 @@ const sendEmail = (toEmail, text) => {
         }
     });
 }
-
-//sendEmail("mikashamshidov@gmail.com", "poop")
 
 
 module.exports = sendEmail

@@ -1,4 +1,6 @@
 const mysql = require('mysql2/promise');
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 require('dotenv').config();
 
 const pool = mysql.createPool({
@@ -8,6 +10,9 @@ const pool = mysql.createPool({
   database: "uniHub",
   connectionLimit: 10,
 });
+
+const sessionStore = new MySQLStore({ createDatabaseTable: true }, pool);
+
 
 const isUserUnique = async (username, email) => {
   try {
@@ -56,4 +61,4 @@ const getAllProfessors = async () => {
 }
 
 
-module.exports = { addUser, isUserUnique, findUserByUsername, findUserById, getAllUsers, getAllProfessors }
+module.exports = { addUser, isUserUnique, findUserByUsername, findUserById, getAllUsers, getAllProfessors, sessionStore}
