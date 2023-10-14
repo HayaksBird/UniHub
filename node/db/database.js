@@ -13,7 +13,6 @@ const pool = mysql.createPool({
 
 const sessionStore = new MySQLStore({ createDatabaseTable: true }, pool);
 
-
 const isUserUnique = async (username, email) => {
   try {
     const [existingUsers] = await pool.query('SELECT * FROM user_table WHERE username = ? OR email = ?', [username, email]);

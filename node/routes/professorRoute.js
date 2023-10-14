@@ -23,10 +23,16 @@ router.delete('/', async (req, res) => {
 router.get('/:professorId', async (req, res) => {
   try {
     const professorId = req.params.professorId; 
+    console.log(process.env.K)
     const response = await axios.get(`${process.env.SECOND_SERVER}/professors/${professorId}`);
     res.status(response.status).json(response.data);
   } catch (error) {
-    res.status(error.response.status).json(error.response.data);
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    } else {
+      // If there is no response, handle the error accordingly
+      res.status(500).json({ error: 'Internal server error' });
+    }
   }
 });
 
