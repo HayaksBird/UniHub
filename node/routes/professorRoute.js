@@ -1,4 +1,5 @@
 const express = require('express')
+const axios = require('axios');
 const router = express.Router();
 require('dotenv').config();
 
@@ -23,8 +24,9 @@ router.delete('/', async (req, res) => {
 router.get('/:professorId', async (req, res) => {
   try {
     const professorId = req.params.professorId; 
-    console.log(process.env.K)
+
     const response = await axios.get(`${process.env.SECOND_SERVER}/professors/${professorId}`);
+    console.log('After Axios request');
     res.status(response.status).json(response.data);
   } catch (error) {
     if (error.response) {
@@ -35,5 +37,8 @@ router.get('/:professorId', async (req, res) => {
     }
   }
 });
+
+// const response = await axios.get(`https://5038-46-106-249-149.ngrok.io/professors/${professorId}`);
+// console.log(response)
 
 module.exports = router;
