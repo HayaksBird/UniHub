@@ -38,7 +38,4 @@ router.get('/:professorId', async (req, res) => {
   }
 });
 
-// const response = await axios.get(`https://5038-46-106-249-149.ngrok.io/professors/${professorId}`);
-// console.log(response)
-
 module.exports = router;

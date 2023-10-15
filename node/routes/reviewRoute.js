@@ -1,4 +1,5 @@
 const express = require('express')
+const axios = require('axios');
 const router = express.Router();
 require('dotenv').config();
 
@@ -20,14 +21,22 @@ router.delete('/', async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
+router.get('/:Id', async (req, res) => {
   try {
-    const response = await axios.get(`${process.env.SECOND_SERVER}/reviews`, { params: req.query });
+    const reviewId = req.params.Id;
+    console.log(`${process.env.SECOND_SERVER}/reviews/${reviewId}`)
+    const response = await axios.get(`${process.env.SECOND_SERVER}/reviews/${reviewId}`);
     res.status(response.status).json(response.data);
   } catch (error) {
-    res.status(error.response.status).json(error.response.data);
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    } else {
+      // If there is no response, handle the error accordingly
+      res.status(500).json({ error: 'Internal server error' });
+    }
   }
 });
+
 
 module.exports = router;
 
