@@ -15,10 +15,13 @@ const checkNotAuthenticated = (req, res, next) => {
 
 const checkAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
-    res.status(200).send()
+    console.log("User Data:", req.user);
+    res.status(200).send();
+  } else {
+    console.log("User Not Authenticated");
+    res.status(403).send();
   }
-  res.status(403).send()
-}
+};
 
 const generateRandomString = () => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
