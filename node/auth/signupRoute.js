@@ -28,7 +28,7 @@ router.post('/', async (req, res, next) => {
     };
 
     try {
-      await axios.post(`${process.env.SECOND_SERVER}/email`, emailData);
+      //await axios.post(`${process.env.SECOND_SERVER}/email`, emailData);
       await addUser(username, normalizedEmail, hash, salt, code);
 
       res.status(200).send();

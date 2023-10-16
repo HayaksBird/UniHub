@@ -53,11 +53,14 @@ app.use(session({
   resave: true,
   saveUninitialized: false,
   cookie: {
-      maxAge: 1000 * 60 * 60 * 24 // 86400000 1 day
+      maxAge: 1000 * 60 * 60 * 24, // 86400000 1 day
+      httpOnly: true,
+      secure: true
   },
   store: sessionStore
 }));
 
+//app.use(helmet());
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(log('dev'));
