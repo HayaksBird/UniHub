@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
 const { generateRandomString } = require('../controllers/controller')
 const sendEmail = require('./nodeMailer-config')
 const { addUser, isUserUnique } = require('../db/database')

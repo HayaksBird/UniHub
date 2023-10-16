@@ -79,6 +79,10 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
+app.get('/check', (req, res, next) => {
+  checkAuthenticated()
+})
+
 
 
 module.exports = app;

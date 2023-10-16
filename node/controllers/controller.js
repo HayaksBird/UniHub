@@ -6,16 +6,16 @@ const genSaltAndHash = async (password) => {
   return { salt, hash };
 };
 
-const checkAuthenticated = (req, res, next) => {
+const checkNotAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     res.status(403).send()
   }
   res.status(200).send()
 }
 
-const checkNotAuthenticated = (req, res, next) => {
+const checkAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
-    return res.status(200).send()
+    res.status(200).send()
   }
   res.status(403).send()
 }
@@ -24,7 +24,14 @@ const generateRandomString = () => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let randomString = '';
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 3; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    randomString += characters.charAt(randomIndex);
+  }
+
+  randomString+='-'
+
+  for (let i = 0; i < 3; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length);
     randomString += characters.charAt(randomIndex);
   }
