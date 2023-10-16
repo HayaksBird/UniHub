@@ -8,7 +8,11 @@ router.post('/', async (req, res) => {
     const response = await axios.post(`${process.env.SECOND_SERVER}/professors`, req.body);
     res.status(response.status).json(response.data);
   } catch (error) {
-    res.status(error.response.status).json(error.response.data);
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    } else {
+      res.status(500).json({ error: 'Internal server error' });
+    }
   }
 });
 
@@ -17,7 +21,11 @@ router.delete('/', async (req, res) => {
     const response = await axios.delete(`${process.env.SECOND_SERVER}/professors`, { data: req.body });
     res.status(response.status).json(response.data);
   } catch (error) {
-    res.status(error.response.status).json(error.response.data);
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    } else {
+      res.status(500).json({ error: 'Internal server error' });
+    }
   }
 });
 

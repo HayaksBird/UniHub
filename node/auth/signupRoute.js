@@ -14,11 +14,20 @@ router.post('/', async (req, res, next) => {
     const code =  generateRandomString()
     const { salt, hash } = await genSaltAndHash(password)
 
-    //await sendEmail(email, code)
-  
-    await addUser(username, email, hash, salt, code)
+    const emailData = {
+      receiverEmail: email,
+      code: code
+    };
 
-    res.status(200).send()
+    try {
+      await axios.post(`${process.env.SECOND_SERVER}/email`, emailData);
+      await addUser(username, email, hash, salt, code)
+
+      res.status(200).send();
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      res.status(500).send('Failed to send email');
+    }
   } else{
     res.status(401).send()
   }
