@@ -31,6 +31,15 @@ CREATE TABLE IF NOT EXISTS review_table (
   FOREIGN KEY (user_id) REFERENCES user_table(id)
 );
 
+-- Insert statements for user_table
+INSERT INTO user_table (username, email, password, salt, hash_algorithm, confirmationCode)
+VALUES
+  ('johndoe123', 'johndoe123@example.com', 'password1', 'salt1', 'SHA256', NULL),
+  ('emily.smith', 'emily.smith@example.com', 'password2', 'salt2', 'SHA256', NULL),
+  ('david.will', 'david.will@example.com', 'password3', 'salt3', 'SHA256', NULL),
+  ('sarah_brown', 'sarah.brown@example.com', 'password4', 'salt4', 'SHA256', NULL),
+  ('michael.davis', 'michael.davis@example.com', 'password5', 'salt5', 'SHA256', NULL);
+
 -- Insert statements for professor_table
 INSERT INTO professor_table (full_name, classes) VALUES ('John Smith', '["MATH203", "CALC201"]');
 INSERT INTO professor_table (full_name, classes) VALUES ('Emily Johnson', '["PHYS101", "CHEM202"]');
@@ -44,6 +53,7 @@ INSERT INTO review_table (prof_id, review_text, rating, user_id, class) VALUES (
 INSERT INTO review_table (prof_id, review_text, rating, user_id, class) VALUES (3, 'Very knowledgeable', 4, 3, 'CSCI301');
 INSERT INTO review_table (prof_id, review_text, rating, user_id, class) VALUES (4, 'Passionate about the subject', 3, 4, 'HIST301');
 INSERT INTO review_table (prof_id, review_text, rating, user_id, class) VALUES (5, 'Engaging lectures', 5, 5, 'ENGL101');
+
 
 
 
