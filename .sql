@@ -14,9 +14,15 @@ CREATE TABLE IF NOT EXISTS user_table (
 CREATE TABLE IF NOT EXISTS professor_table (
   id INT AUTO_INCREMENT PRIMARY KEY,
   full_name VARCHAR(255), 
-  classes JSON,
   university VARCHAR(255) DEFAULT 'Koc University',
   photo_reference VARCHAR(255) DEFAULT 'default_photo.jpg'
+);
+
+CREATE TABLE IF NOT EXISTS class_table (
+  class_id INT AUTO_INCREMENT PRIMARY KEY,
+  class_name VARCHAR(255) NOT NULL,
+  professor_id INT,
+  FOREIGN KEY (professor_id) REFERENCES professor_table(id)
 );
 
 CREATE TABLE IF NOT EXISTS review_table (
@@ -25,10 +31,11 @@ CREATE TABLE IF NOT EXISTS review_table (
   review_text TEXT,
   rating INT,
   user_id INT,
-  class VARCHAR(50),
+  class_id INT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (prof_id) REFERENCES professor_table(id),
-  FOREIGN KEY (user_id) REFERENCES user_table(id)
+  FOREIGN KEY (user_id) REFERENCES user_table(id),
+  FOREIGN KEY (class_id) REFERENCES class_table(class_id)
 );
 
 -- Insert statements for user_table
@@ -41,20 +48,27 @@ VALUES
   ('michael.davis', 'michael.davis@example.com', 'password5', 'salt5', 'SHA256', NULL);
 
 -- Insert statements for professor_table
-INSERT INTO professor_table (full_name, classes) VALUES ('John Smith', '["MATH203", "CALC201"]');
-INSERT INTO professor_table (full_name, classes) VALUES ('Emily Johnson', '["PHYS101", "CHEM202"]');
-INSERT INTO professor_table (full_name, classes) VALUES ('David Williams', '["CSCI301", "DAN101"]');
-INSERT INTO professor_table (full_name, classes) VALUES ('Sarah Brown', '["HIST301", "POLI202"]');
-INSERT INTO professor_table (full_name, classes) VALUES ('Michael Davis', '["ENGL101", "LIT205"]');
+INSERT INTO professor_table (full_name) VALUES ('John Smith');
+INSERT INTO professor_table (full_name) VALUES ('Emily Johnson');
+INSERT INTO professor_table (full_name) VALUES ('David Williams');
+INSERT INTO professor_table (full_name) VALUES ('Sarah Brown');
+INSERT INTO professor_table (full_name) VALUES ('Michael Davis');
+
+-- Insert statements for class_table
+INSERT INTO class_table (class_name, professor_id) VALUES ('MATH203', 1);
+INSERT INTO class_table (class_name, professor_id) VALUES ('CALC201', 1);
+INSERT INTO class_table (class_name, professor_id) VALUES ('PHYS101', 2);
+INSERT INTO class_table (class_name, professor_id) VALUES ('CHEM202', 2);
+INSERT INTO class_table (class_name, professor_id) VALUES ('CSCI301', 3);
+INSERT INTO class_table (class_name, professor_id) VALUES ('DAN101', 3);
+INSERT INTO class_table (class_name, professor_id) VALUES ('HIST301', 4);
+INSERT INTO class_table (class_name, professor_id) VALUES ('POLI202', 4);
+INSERT INTO class_table (class_name, professor_id) VALUES ('ENGL101', 5);
+INSERT INTO class_table (class_name, professor_id) VALUES ('LIT205', 5);
 
 -- Insert statements for review_table
-INSERT INTO review_table (prof_id, review_text, rating, user_id, class) VALUES (1, 'Great professor!', 5, 1, 'MATH203');
-INSERT INTO review_table (prof_id, review_text, rating, user_id, class) VALUES (2, 'Awesome teacher!', 4, 2, 'PHYS101');
-INSERT INTO review_table (prof_id, review_text, rating, user_id, class) VALUES (3, 'Very knowledgeable', 4, 3, 'CSCI301');
-INSERT INTO review_table (prof_id, review_text, rating, user_id, class) VALUES (4, 'Passionate about the subject', 3, 4, 'HIST301');
-INSERT INTO review_table (prof_id, review_text, rating, user_id, class) VALUES (5, 'Engaging lectures', 5, 5, 'ENGL101');
-
-
-
-
-
+INSERT INTO review_table (prof_id, review_text, rating, user_id, class_id) VALUES (1, 'Great professor!', 5, 1, 1);
+INSERT INTO review_table (prof_id, review_text, rating, user_id, class_id) VALUES (2, 'Awesome teacher!', 4, 2, 3);
+INSERT INTO review_table (prof_id, review_text, rating, user_id, class_id) VALUES (3, 'Very knowledgeable', 4, 3, 5);
+INSERT INTO review_table (prof_id, review_text, rating, user_id, class_id) VALUES (4, 'Passionate about the subject', 3, 4, 7);
+INSERT INTO review_table (prof_id, review_text, rating, user_id, class_id) VALUES (5, 'Engaging lectures', 5, 5, 9);
