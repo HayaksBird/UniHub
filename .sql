@@ -14,9 +14,9 @@ CREATE TABLE IF NOT EXISTS user_table (
 CREATE TABLE IF NOT EXISTS professor_table (
   id INT AUTO_INCREMENT PRIMARY KEY,
   full_name VARCHAR(255), 
-  class VARCHAR(50),
-  university VARCHAR(255), 
-  photo_reference VARCHAR(255)
+  classes JSON,
+  university VARCHAR(255) DEFAULT 'Koc University',
+  photo_reference VARCHAR(255) DEFAULT 'default_photo.jpg'
 );
 
 CREATE TABLE IF NOT EXISTS review_table (
@@ -25,28 +25,26 @@ CREATE TABLE IF NOT EXISTS review_table (
   review_text TEXT,
   rating INT,
   user_id INT,
+  class VARCHAR(50),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (prof_id) REFERENCES professor_table(id),
   FOREIGN KEY (user_id) REFERENCES user_table(id)
 );
 
-INSERT INTO professor_table (full_name, class, university, photo_reference)
-VALUES
-  ('Professor 1', 'math203', 'Koc University', 'default'),
-  ('Professor 2', 'turk201', 'Koc University', 'default'),
-  ('Professor 3', 'comp100', 'Koc University', 'default');
+-- Insert statements for professor_table
+INSERT INTO professor_table (full_name, classes) VALUES ('John Smith', '["MATH203", "CALC201"]');
+INSERT INTO professor_table (full_name, classes) VALUES ('Emily Johnson', '["PHYS101", "CHEM202"]');
+INSERT INTO professor_table (full_name, classes) VALUES ('David Williams', '["CSCI301", "DAN101"]');
+INSERT INTO professor_table (full_name, classes) VALUES ('Sarah Brown', '["HIST301", "POLI202"]');
+INSERT INTO professor_table (full_name, classes) VALUES ('Michael Davis', '["ENGL101", "LIT205"]');
 
-INSERT INTO review_table (prof_id, review_text, rating, user_id)
-VALUES
-  (1, 'Great professor!', 5, 1),
-  (2, 'Average professor.', 3, 2),
-  (3, 'Excellent teacher!', 5, 3);
+-- Insert statements for review_table
+INSERT INTO review_table (prof_id, review_text, rating, user_id, class) VALUES (1, 'Great professor!', 5, 1, 'MATH203');
+INSERT INTO review_table (prof_id, review_text, rating, user_id, class) VALUES (2, 'Awesome teacher!', 4, 2, 'PHYS101');
+INSERT INTO review_table (prof_id, review_text, rating, user_id, class) VALUES (3, 'Very knowledgeable', 4, 3, 'CSCI301');
+INSERT INTO review_table (prof_id, review_text, rating, user_id, class) VALUES (4, 'Passionate about the subject', 3, 4, 'HIST301');
+INSERT INTO review_table (prof_id, review_text, rating, user_id, class) VALUES (5, 'Engaging lectures', 5, 5, 'ENGL101');
 
-INSERT INTO user_table (id, username, email, password, salt, hash_algorithm, confirmationCode)
-VALUES 
-  (1, 'Mikhail', 'poop@gmail.com', '$2b$06$ZW/ce/UUES3PEOOKckwGkO/5nGabnVibEncePKPvwmu4Ic4GSBnzW', '$2b$06$ZW/ce/UUES3PEOOKckwGkO', 'bcrypt', NULL);
-  (2, 'XT3RM1NATOR', 'mikashamshidov1@gmail.com', '$2b$06$fuOCdUEgcpMy8uvnjbCNru3rT6abNdEFaJAq54H4V/hGOjB3JGUDi', '$2b$06$fuOCdUEgcpMy8uvnjbCNru', 'bcrypt', NULL);
-  (3, 'XT3RM1NATORr', 'mikashamshidov2@gmail.com', '$2b$06$gn7FXYQ5UsRyteqwne3ZfuJ2aM.3ez/GdVR7hakCdQDTdV1.mwjZq', '$2b$06$gn7FXYQ5UsRyteqwne3Zfu', 'bcrypt', NULL);
 
 
 
