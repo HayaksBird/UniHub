@@ -6,30 +6,24 @@ const router = express.Router();
 router.post('/', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
-      console.log("An error occurred:", err);
-      return res.status(500).json({ message: 'An error occurred' });
+      console.log("An error occurred:", err)
+      return res.status(500).json({ message: 'An error occurred' })
     }
 
     if (!user) {
       console.log("Authentication failed");
-      return res.status(401).json({ message: 'Authentication failed' });
+      return res.status(401).json({ message: 'Authentication failed' })
     }
 
     req.login(user, (loginErr) => {
       if (loginErr) {
-        console.log("Error serializing user:", loginErr);
-        return res.status(500).json({ message: 'An error occurred during login' });
+        console.log("Error serializing user:", loginErr)
+        return res.status(500).json({ message: 'An error occurred during login' })
       }
 
-      // Now the user is properly authenticated and their data is stored in the session
-      return res.status(200).json({ message: 'Authentication successful', user });
+      return res.status(200).json({ message: 'Authentication successful', user })
     });
   })(req, res, next);
 });
-
-
-// router.get('/', (req, res, next) => {
-//   res.render('./index.ejs')
-// })
 
 module.exports = router
