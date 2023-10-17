@@ -1,15 +1,17 @@
 CREATE DATABASE IF NOT EXISTS uniHub;
 USE uniHub;
 
-CREATE TABLE IF NOT EXISTS user_table (
+CREATE TABLE user_table (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  username VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  salt VARCHAR(255) NOT NULL,
-  hash_algorithm VARCHAR(255) NOT NULL,
+  user_type ENUM('regular', 'oauth2') NOT NULL,
+  oauth_id VARCHAR(255),
+  username VARCHAR(255),
+  email VARCHAR(255),
+  password VARCHAR(255),
+  salt VARCHAR(255),
+  hash_algorithm VARCHAR(255),
   confirmationCode VARCHAR(255)
-);
+); 
 
 CREATE TABLE IF NOT EXISTS professor_table (
   id INT AUTO_INCREMENT PRIMARY KEY,
