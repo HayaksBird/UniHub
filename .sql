@@ -10,8 +10,11 @@ CREATE TABLE IF NOT EXISTS user_table (
   password VARCHAR(255),
   salt VARCHAR(255),
   hash_algorithm VARCHAR(255),
-  confirmationCode VARCHAR(255)
-); 
+  confirmationCode VARCHAR(255),
+  access_token VARCHAR(255),
+  refresh_token VARCHAR(255)
+);
+
 
 CREATE TABLE IF NOT EXISTS professor_table (
   id INT AUTO_INCREMENT PRIMARY KEY,
