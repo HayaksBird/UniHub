@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS user_table (
   user_type ENUM('regular', 'oauth2') NOT NULL,
   oauth_id VARCHAR(255),
   username VARCHAR(255),
-  email VARCHAR(255),
+  email VARCHAR(255) NOT NULL,
   password VARCHAR(255),
   salt VARCHAR(255),
   hash_algorithm VARCHAR(255),
