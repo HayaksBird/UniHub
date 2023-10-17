@@ -26,7 +26,7 @@ const isUserUnique = async (username, email) => {
 
 const addUser = async (username, email, password, salt, code) => {
   try {
-    const [result] = await pool.query('INSERT INTO user_table (username, email, password, salt, hash_algorithm, confirmationCode) VALUES (?, ?, ?, ?, ?, ?)', [username, email, password, salt, "bcrypt", code]);
+    const [result] = await pool.query('INSERT INTO user_table (user_type, username, email, password, salt, hash_algorithm, confirmationCode) VALUES (?, ?, ?, ?, ?, ?, ?)', ['regular', username, email, password, salt, "bcrypt", code]);
     console.log(result)
     if (result.affectedRows === 1) {
       console.log('User added successfully');
@@ -40,6 +40,11 @@ const addUser = async (username, email, password, salt, code) => {
 
 const findUserByUsername = async(username) => {
   const [user] = await pool.query(`SELECT * FROM user_table WHERE username = ?`, [username]);
+  return user;
+}
+
+const findUserByEmail = async(email) => {
+  const [user] = await pool.query(`SELECT * FROM user_table WHERE email = ?`, [email]);
   return user;
 }
 
@@ -59,5 +64,25 @@ const getAllProfessors = async () => {
   return professors
 }
 
+const addOauth2User = async (oauthId, email, accessToken, refreshToken) => {
+  try {
+    const result = await pool.query(
+      'INSERT INTO user_table (user_type, oauth_id, email, access_token, refresh_token) VALUES (?, ?, ?, ?, ?)',
+      ['oauth2', oauthId, email, accessToken, refreshToken]
+    );
 
-module.exports = { addUser, isUserUnique, findUserByUsername, findUserById, getAllUsers, getAllProfessors, sessionStore}
+    if (result.affectedRows === 1) {
+      console.log('User added successfully');
+    } else {
+      console.log('Failed to add user');
+    }
+
+  } catch (error) {
+    console.error('Error adding user:', error);
+  }
+};
+
+
+
+
+module.exports = { addUser, isUserUnique, findUserByUsername, findUserById, getAllUsers, getAllProfessors, findUserByEmail, addOauth2User, sessionStore}

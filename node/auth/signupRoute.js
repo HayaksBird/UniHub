@@ -12,7 +12,7 @@ router.post('/', async (req, res, next) => {
   const { username, email, password } = req.body;
 
   if (!validator.isEmail(email)) {
-    res.status(400).send('Invalid email address');
+    return res.status(400).send('Invalid email address');
   }
 
   const normalizedEmail = validator.normalizeEmail(email);

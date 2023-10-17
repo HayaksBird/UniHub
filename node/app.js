@@ -67,10 +67,6 @@ app.use(log('dev'));
 app.use(bodyParser.json())
 app.use(cookieParser())
 //app.use(errorHandler);
-app.use('/signup', signupRoute)
-app.use('/login', loginRoute)
-app.use('/professors', professorRoute)
-app.use('/reviews', reviewRoute)
 app.use(cookieParser(process.env.SECRET))
 
 app.use((err, req, res, next) => {
@@ -82,7 +78,36 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
+app.use('/signup', signupRoute)
+app.use('/login', loginRoute)
+app.use('/professors', professorRoute)
+app.use('/reviews', reviewRoute)
+
 app.get('/check', checkAuthenticated)
+
+app.get('/auth/google/callback', (req, res, next) => {
+  // Use the 'google' strategy for authentication and handle the response
+  passport.authenticate('google', (err, user, info) => {
+    if (err) {
+      return res.status(500).json({ message: 'Authentication error' });
+    }
+
+    req.login(user, (loginErr) => {
+      if (loginErr) {
+        return res.status(500).json({ message: 'Error creating session for the new user' });
+      }
+      if (info && info.isNewUser) {
+        console.log("User:", info.user);
+        return res.status(201).json({ message: 'User created successfully and session created' });
+      } else {
+        console.log("User:", info.user);
+        return res.status(200).json({ message: 'Authentication successful' });
+      }
+    });
+  })(req, res, next);
+});
+
+
 
 
 
