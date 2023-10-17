@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS uniHub;
 USE uniHub;
 
-CREATE TABLE user_table (
+CREATE TABLE IF NOT EXISTS user_table (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_type ENUM('regular', 'oauth2') NOT NULL,
   oauth_id VARCHAR(255),
