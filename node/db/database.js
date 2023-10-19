@@ -15,7 +15,7 @@ const sessionStore = new MySQLStore({ createDatabaseTable: true }, pool);
 
 const isUserUnique = async (username, email) => {
   try {
-    const [existingUsers] = await pool.query('SELECT * FROM user_table WHERE username = ? OR email = ?', [username, email]);
+    const [existingUsers] = await pool.query('SELECT * FROM user WHERE username = ? OR email = ?', [username, email]);
 
     return existingUsers.length === 0; 
   } catch (error) {
@@ -26,7 +26,7 @@ const isUserUnique = async (username, email) => {
 
 const addUser = async (username, email, password, salt, code) => {
   try {
-    const [result] = await pool.query('INSERT INTO user_table (user_type, username, email, password, salt, hash_algorithm, confirmationCode) VALUES (?, ?, ?, ?, ?, ?, ?)', ['regular', username, email, password, salt, "bcrypt", code]);
+    const [result] = await pool.query('INSERT INTO user (user_type, username, email, password, salt, hash_algorithm, confirmationCode) VALUES (?, ?, ?, ?, ?, ?, ?)', ['regular', username, email, password, salt, "bcrypt", code]);
     console.log(result)
     if (result.affectedRows === 1) {
       console.log('User added successfully');
@@ -39,12 +39,12 @@ const addUser = async (username, email, password, salt, code) => {
 };
 
 const findUserByUsername = async(username) => {
-  const [user] = await pool.query(`SELECT * FROM user_table WHERE username = ?`, [username]);
+  const [user] = await pool.query(`SELECT * FROM user WHERE username = ?`, [username]);
   return user;
 }
 
 const findUserByEmail = async(email) => {
-  const [user] = await pool.query(`SELECT * FROM user_table WHERE email = ?`, [email]);
+  const [user] = await pool.query(`SELECT * FROM user WHERE email = ?`, [email]);
   return user;
 }
 

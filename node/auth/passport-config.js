@@ -32,8 +32,8 @@ passport.use(new LocalStrategy(
 ));
 
 passport.use(new GoogleStrategy({
-  clientID: `${process.env.CLIENT_ID}`,
-  clientSecret: `${process.env.CLENT_SECRET}`,
+  clientID: `179883402014-k6htcqa1fd005p8ask1s43akk1v2o2j5.apps.googleusercontent.com`,
+  clientSecret: `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`,
   callbackURL: '/auth/google/callback',
   passReqToCallback: true,
 },
