@@ -27,7 +27,6 @@ const isUserUnique = async (username, email) => {
 const addUser = async (username, email, password, salt, code) => {
   try {
     const [result] = await pool.query('INSERT INTO user (user_type, username, email, password, salt, hash_algorithm, confirmationCode) VALUES (?, ?, ?, ?, ?, ?, ?)', ['regular', username, email, password, salt, "bcrypt", code]);
-    console.log(result)
     if (result.affectedRows === 1) {
       console.log('User added successfully');
     } else {

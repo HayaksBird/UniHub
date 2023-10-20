@@ -18,11 +18,10 @@ const app = express()
 require('dotenv').config()
 
 
-// app.use((req, res, next) => {
-//   console.log(req.headers)
-//   if(req.headers["x-api-key"] == process.env.API_KEY) next();
-//   else res.status(403).send()
-// })
+app.use((req, res, next) => {
+  if(req.headers["x-api-key"] == process.env.API_KEY) next();
+  else res.status(402).send()
+})
 app.use((req, res, next) => {
   const start = Date.now();
   const logData = {
