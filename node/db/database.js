@@ -4,10 +4,10 @@ const MySQLStore = require('express-mysql-session')(session);
 require('dotenv').config();
 
 const pool = mysql.createPool({
-  host: process.env.HOST,
-  user: "root",
-  password: process.env.PASSWORD,
-  database: "uniHub",
+  host           : process.env.HOST,
+  user           : "root",
+  password       : process.env.PASSWORD,
+  database       : "uniHub",
   connectionLimit: 10,
 });
 

@@ -1,0 +1,1 @@
+const redisClient = require('../cache/redis-config')
