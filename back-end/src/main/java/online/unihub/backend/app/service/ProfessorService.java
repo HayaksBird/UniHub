@@ -5,23 +5,38 @@ import online.unihub.backend.app.entity.Professor;
 import online.unihub.backend.exception.ItemNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
 public class ProfessorService {
     private final ProfessorRepository professorRepository;
+    private final StringSimilarityService stringSimilarityService;
 
 
-    public ProfessorService(ProfessorRepository professorRepository) {
+    public ProfessorService(ProfessorRepository professorRepository,
+                            StringSimilarityService stringSimilarityService) {
+
         this.professorRepository = professorRepository;
+        this.stringSimilarityService = stringSimilarityService;
     }
 
 
-    public Professor getProfessor(int id) {
-        var professor = professorRepository.findById(id);
+    public List<Professor> getProfessor(String fullName) {
+        List<Professor> similarProfs = new LinkedList<>();
+        List<Professor> allProfs;
 
-        if (professor.isPresent()) return professor.get();
-        throw new ItemNotFoundException(Professor.class, id);
+        allProfs = professorRepository.findAll();
+
+        for (Professor prof : allProfs) {
+            if (stringSimilarityService.areSimilar(fullName, prof.getFullName()))
+                similarProfs.add(prof);
+        }
+
+        if (similarProfs.isEmpty())
+            throw new ItemNotFoundException(Professor.class, fullName);
+
+        return similarProfs;
     }
 
 

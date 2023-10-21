@@ -13,14 +13,14 @@ import java.sql.Timestamp;
 @Builder
 @AllArgsConstructor
 @Entity
-@Table(name = "review_table")
+@Table(name = "review")
 public class Review {
     @Id
-    @Column(name = "review_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "prof_id")
+    @Column(name = "professor_id")
     private int profId;
 
     @Column(name = "review_text")
@@ -31,6 +31,9 @@ public class Review {
 
     @Column(name = "user_id")
     private int userId;
+
+    @Column(name = "class")
+    private String reviewClass;
 
     @Column(name = "created_at")
     private Timestamp timestamp;

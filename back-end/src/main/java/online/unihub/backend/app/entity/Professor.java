@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @Entity
-@Table(name = "professor_table")
+@Table(name = "professor")
 public class Professor {
     @Id
     @Column(name = "id")
@@ -22,10 +22,7 @@ public class Professor {
     private int id;
 
     @Column(name = "full_name")
-    private String name;
-
-    @Column(name = "class")
-    private String className;
+    private String fullName;
 
     @Column(name = "university")
     private String university;
@@ -36,7 +33,14 @@ public class Professor {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.REMOVE,
             fetch = FetchType.LAZY)
-    @JoinColumn(name = "prof_id",
+    @JoinColumn(name = "professor_id",
             referencedColumnName = "id")
     private List<Review> reviews;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.REMOVE,
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "professor_id",
+            referencedColumnName = "id")
+    private List<Course> courses;
 }

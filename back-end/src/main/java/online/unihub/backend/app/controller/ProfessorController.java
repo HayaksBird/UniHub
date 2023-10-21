@@ -27,9 +27,9 @@ public class ProfessorController {
     }
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Professor> getProfessor(@PathVariable int id) {
-        return new ResponseEntity<>(professorService.getProfessor(id), HttpStatus.OK);
+    @GetMapping("/{fullName}")
+    public ResponseEntity<List<Professor>> getProfessor(@PathVariable String fullName) {
+        return new ResponseEntity<>(professorService.getProfessor(fullName), HttpStatus.OK);
     }
 
 

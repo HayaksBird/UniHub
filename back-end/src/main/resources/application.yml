@@ -1,4 +1,17 @@
+server:
+  port: 8080
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username:
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   #Allow Spring to spot put/delete requests from the html forms
   mvc:
     hiddenmethod:
