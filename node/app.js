@@ -82,7 +82,7 @@ app.use('/login', loginRoute)
 app.use('/professors', professorRoute)
 app.use('/reviews', reviewRoute)
 
-app.get('/check', checkAuthenticated)
+//app.get('/check', checkAuthenticated)
 
 app.get('/auth/google/callback', (req, res, next) => {
   // Use the 'google' strategy for authentication and handle the response

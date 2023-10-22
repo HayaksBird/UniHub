@@ -10,15 +10,16 @@ router.post('/', async (req, res) => {
   } catch (error) {
     if (error.response) {
       res.status(error.response.status).json(error.response.data);
-    } else {
-      res.status(500).json({ error: 'Internal server error' });
-    }
+    } 
+
+    res.status(500).json({ error: 'Internal server error' });
+
   }
 });
 
-router.delete('/', async (req, res) => {
-  try {
-    const response = await axios.delete(`${process.env.SECOND_SERVER}/reviews`, { data: req.body });
+router.delete('/:Id', async (req, res) => {
+  try { 
+    const response = await axios.delete(`${process.env.SECOND_SERVER}/reviews/${req.params.Id}`);
     res.status(response.status).json(response.data);
   } catch (error) {
     if (error.response) {
