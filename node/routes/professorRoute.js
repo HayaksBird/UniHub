@@ -35,11 +35,9 @@ router.delete('/:professorId', async (req, res) => {
 
 router.get('/:name', async (req, res) => {
   try {
-    console.log(req.params.name)
-    const professorId = req.params.professorId; 
+    console.log(`${process.env.SECOND_SERVER}/professors/${req.params.name}`)
 
     const response = await axios.get(`${process.env.SECOND_SERVER}/professors/${professorId}`);
-    console.log('After Axios request');
     res.status(response.status).json(response.data);
   } catch (error) {
     if (error.response) {
@@ -53,7 +51,6 @@ router.get('/:name', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-
     const response = await axios.get(`${process.env.SECOND_SERVER}/professors`);
 
     res.status(response.status).json(response.data);
