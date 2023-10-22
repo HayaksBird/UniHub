@@ -18,17 +18,20 @@ router.post('/', async (req, res, next) => {
   const normalizedEmail = validator.normalizeEmail(email);
 
   const isUnique = await isUserUnique(username, normalizedEmail);
+
   if (isUnique) {
     const code = generateRandomString();
     const { salt, hash } = await genSaltAndHash(password);
 
     const emailData = {
-      receiverEmail: normalizedEmail,
+      email: normalizedEmail,
       code: code,
     };
 
     try {
-      //await axios.post(`${process.env.SECOND_SERVER}/email`, emailData);
+
+      axios.post(`${process.env.SECOND_SERVER}/auth`, emailData);
+
       await addUser(username, normalizedEmail, hash, salt, code);
 
       res.status(200).send();

@@ -16,21 +16,26 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.delete('/', async (req, res) => {
+router.delete('/:professorId', async (req, res) => {
   try {
-    const response = await axios.delete(`${process.env.SECOND_SERVER}/professors`, { data: req.body });
+    const professorId = req.params.professorId; 
+
+    const response = await axios.delete(`${process.env.SECOND_SERVER}/professors/${professorId}`);
+    console.log('After Axios request');
     res.status(response.status).json(response.data);
   } catch (error) {
     if (error.response) {
       res.status(error.response.status).json(error.response.data);
-    } else {
-      res.status(500).json({ error: 'Internal server error' });
-    }
+    } 
+
+    res.status(500).json({ error: 'Internal server error' });
+    
   }
 });
 
-router.get('/:professorId', async (req, res) => {
+router.get('/:name', async (req, res) => {
   try {
+    console.log(req.params.name)
     const professorId = req.params.professorId; 
 
     const response = await axios.get(`${process.env.SECOND_SERVER}/professors/${professorId}`);
@@ -39,10 +44,26 @@ router.get('/:professorId', async (req, res) => {
   } catch (error) {
     if (error.response) {
       res.status(error.response.status).json(error.response.data);
-    } else {
-      // If there is no response, handle the error accordingly
-      res.status(500).json({ error: 'Internal server error' });
     }
+
+    res.status(500).json({ error: 'Internal server error' });
+    
+  }
+});
+
+router.get('/', async (req, res) => {
+  try {
+
+    const response = await axios.get(`${process.env.SECOND_SERVER}/professors`);
+
+    res.status(response.status).json(response.data);
+  } catch (error) {
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    }
+    
+    res.status(500).json({ error: 'Internal server error' });
+    
   }
 });
 
