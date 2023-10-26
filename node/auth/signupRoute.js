@@ -30,7 +30,7 @@ router.post('/', async (req, res, next) => {
 
     try {
 
-      axios.post(`${process.env.SECOND_SERVER}/auth`, emailData);
+      //axios.post(`${process.env.SECOND_SERVER}/auth`, emailData);
 
       await addUser(username, normalizedEmail, hash, salt, code);
 
