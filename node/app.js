@@ -6,48 +6,39 @@ const reviewRoute = require('./routes/reviewRoute')
 const passport = require('./auth/passport-config')
 const signupRoute = require('./auth/signupRoute')
 const loginRoute = require('./auth/loginRoute')
+const rateLimit = require("express-rate-limit");
 const courseRoute = require('./routes/courseRoute')
 const cookieParser = require('cookie-parser')
+const responseTime = require('response-time')
 const errorHandler = require('errorhandler')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const logger = require('./log/logger')
 const express = require('express')
+const helmet = require('helmet')
 const log = require('morgan');
 const cors = require('cors')
 const app = express()
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, 
+  max: 100, 
+});
+
 require('dotenv').config()
+
+app.set('trust proxy', 1);
 
 
 // app.use((req, res, next) => {
-//   if(req.headers["x-api-key"] == process.env.API_KEY) next();
+//   if(req.header["X-Api-Key"] == process.env.API_KEY) next();
 //   else res.status(402).send()
 // })
-app.use((req, res, next) => {
-  const start = Date.now();
-  const logData = {
-    method: req.method,
-    url: req.originalUrl,
-  };
 
-  res.on('finish', () => {
-    const responseTime = Date.now() - start;
-    logData.status = res.statusCode;
-    logData.responseTime = `${responseTime}ms`;
-    logger.info('HTTP', logData);
-  });
-
-  res.on('close', () => {
-    const responseTime = Date.now() - start;
-    logData.responseTime = `${responseTime}ms`;
-    logger.warn('HTTP Connection Closed Prematurely', logData);
-  });
-
-  next();
-});
-
-app.set('view engine', 'ejs');
+app.use(helmet());
 app.use(cors());
+app.use(limiter);
+
 app.use(session({
   secret: process.env.SECRET,
   resave: true,
@@ -60,7 +51,6 @@ app.use(session({
   store: sessionStore
 }));
 
-//app.use(helmet());
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(log('dev'));
@@ -68,6 +58,34 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 //app.use(errorHandler);
 app.use(cookieParser(process.env.SECRET))
+app.use(responseTime());
+
+app.use((req, res, next) => {
+  const start = Date.now();
+  const logData = {
+    method: req.method,
+    date: new Date(), 
+  };
+
+  res.on('finish', () => {
+    const responseTime = res.get('X-Response-Time');
+    logData.status = res.statusCode;
+    logData.responseTime = `${responseTime}`;
+    logData.endpoint = req.originalUrl;
+    logData.ipAddress = req.ip;
+    logger.info('HTTP', logData);
+  });
+
+  res.on('close', () => {
+    const responseTime = res.get('X-Response-Time');
+    logData.responseTime = `${responseTime}`;
+    logger.warn('HTTP Connection Closed Prematurely', logData);
+  });
+
+  next();
+});
+
+
 
 app.use((err, req, res, next) => {
   const logData = {
@@ -84,7 +102,9 @@ app.use('/professors', professorRoute)
 app.use('/reviews', reviewRoute)
 app.use('/courses', courseRoute)
 
-//app.get('/check', checkAuthenticated)
+app.get('/', (req, res) => {
+  res.send(req.ip)
+})
 
 app.get('/auth/google/callback', (req, res, next) => {
   // Use the 'google' strategy for authentication and handle the response
