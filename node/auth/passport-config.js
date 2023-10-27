@@ -12,8 +12,6 @@ passport.use(new LocalStrategy(
   async (username, password, done) => {
     try {
       const [user] = await findUserByUsername(username)
-      console.log(username)
-      console.log(user)
       
       if (!user) {
         return done(null, false);
