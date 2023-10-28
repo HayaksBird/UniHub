@@ -15,9 +15,14 @@ const checkNotAuthenticated = (req, res, next) => {
 
 const checkAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
-    res.status(200).json({ message: "User is authenticated" });
+    const userInfo = {
+      username: req.user.username, 
+      email: req.user.email
+    };
+
+    res.status(200).json({ status: "User is authenticated", user: userInfo });
   } else {
-    res.status(403).json({ message: "User is not authenticated" });
+    res.status(403).json({ status: "User is not authenticated" });
   }
 };
 
@@ -25,14 +30,7 @@ const generateRandomString = () => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let randomString = '';
 
-  for (let i = 0; i < 3; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    randomString += characters.charAt(randomIndex);
-  }
-
-  randomString+='-'
-
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 4; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length);
     randomString += characters.charAt(randomIndex);
   }
