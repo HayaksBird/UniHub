@@ -22,7 +22,7 @@ const app = express()
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, 
-  max: 100, 
+  max: 1000, 
 });
 
 require('dotenv').config()
@@ -104,6 +104,7 @@ app.use('/reviews', reviewRoute)
 app.use('/courses', courseRoute)
 
 app.get('/', (req, res) => {
+  console.log(req.headers['X-Forwarded-For'])
   res.send(req.ip)
 })
 
