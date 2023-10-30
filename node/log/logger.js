@@ -3,8 +3,8 @@ const { createLogger, format, transports } = winston;
 const { combine, timestamp, label, printf, metadata } = format;
 
 const logFormat = printf(({level, message, label, metadata }) => {
-  const { method, url, status, responseTime, endpoint, ipAddress, date } = metadata;
-  return `📥 Request Data: ${label ? `[${label}]` : ''} [${level}] ${message}\n   [Method: ${method}, Status: ${status}, Response Time: ${responseTime}, Endpoint: ${endpoint}, IP Address: ${ipAddress}, Date: ${date}]`;
+  const { method, status, responseTime, endpoint, ipAddress, body, date } = metadata;
+  return `📥 Request Data: ${label ? `[${label}]` : ''} [${level}] ${message}\n   [Method: ${method}, Status: ${status}, Response Time: ${responseTime}, Endpoint: ${endpoint}, IP Address: ${ipAddress}, Request Body: ${body}, Date: ${date}]`;
 });
 
 const logger = createLogger({

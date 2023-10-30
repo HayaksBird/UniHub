@@ -73,6 +73,7 @@ app.use((req, res, next) => {
     logData.responseTime = `${responseTime}`;
     logData.endpoint = req.originalUrl;
     logData.ipAddress = req.ip;
+    logData.body = req.body;
     logger.info('HTTP', logData);
   });
 
