@@ -103,10 +103,7 @@ app.use('/professors', professorRoute)
 app.use('/reviews', reviewRoute)
 app.use('/courses', courseRoute)
 
-app.get('/', (req, res) => {
-  console.log(req.headers['X-Forwarded-For'])
-  res.send(req.ip)
-})
+app.get('/auth', checkAuthenticated)
 
 app.get('/auth/google/callback', (req, res, next) => {
   // Use the 'google' strategy for authentication and handle the response
