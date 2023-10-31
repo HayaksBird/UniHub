@@ -62,6 +62,15 @@ async (req, accessToken, refreshToken, profile, done) => {
   }
 }));
 
+passport.generateAuthURL = function (req) {
+  const options = {
+    scope: ['profile', 'email'],
+    prompt: 'select_account', // Force to select the Google account every time
+  };
+
+  return passport.authenticate('google', options)(req, null);
+};
+
 
 passport.serializeUser((user, done) => {
   done(null, user.id);

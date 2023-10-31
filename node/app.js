@@ -120,7 +120,7 @@ app.get('/auth/google/callback', (req, res, next) => {
         return res.status(500).json({ message: 'Error creating session for the new user' });
       }
       if (info && info.isNewUser) {
-        console.log("User:", info.user);
+        console.log("User:", user);
         return res.status(201).json({ message: 'User created successfully and session created' });
       } else {
         console.log("User:", info.user);

@@ -26,10 +26,7 @@ router.post('/', (req, res, next) => {
   })(req, res, next);
 });
 
-router.get('/oauth2', (req, res, next) => {
-  // Use the 'google' strategy to initiate the Google OAuth2 authentication process
-  passport.authenticate('google', { scope: ['profile', 'email'] })(req, res, next);
-});
+router.get('/oauth2', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 
 module.exports = router

@@ -48,25 +48,25 @@ const findUserByEmail = async(email) => {
 }
 
 const findUserById = async(id) => {
-  const [user] = await pool.query(`SELECT * FROM user_table WHERE id = ?`, [id])
+  const [user] = await pool.query(`SELECT * FROM user WHERE id = ?`, [id])
   return user;
 }
 
 const getAllUsers = async () => {
-  const [users] = await pool.query(`SELECT * FROM user_table`)
+  const [users] = await pool.query(`SELECT * FROM user`)
   console.log(users)
   return users
 }
 
 const getAllProfessors = async () => {
-  const [professors] = await pool.query("SELECT * FROM professor_table")
+  const [professors] = await pool.query("SELECT * FROM professor")
   return professors
 }
 
 const addOauth2User = async (oauthId, email, accessToken, refreshToken) => {
   try {
     const result = await pool.query(
-      'INSERT INTO user_table (user_type, oauth_id, email, access_token, refresh_token) VALUES (?, ?, ?, ?, ?)',
+      'INSERT INTO user (user_type, oauth_id, email, access_token, refresh_token) VALUES (?, ?, ?, ?, ?)',
       ['oauth2', oauthId, email, accessToken, refreshToken]
     );
 
