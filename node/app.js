@@ -1,5 +1,6 @@
+// Import necessary modules and functions
 const { addUser, isUserUnique, findUserByUsername, findUserById, getAllUsers, getAllProfessors, sessionStore } = require('./db/database')
-const { genSaltAndHash, checkAuthenticated, checkNotAuthenticated } = require('./controllers/controller')
+const { genSaltAndHash, checkAuthenticated } = require('./controllers/controller')
 const searchProfessors = require('./controllers/searchController')
 const professorRoute = require('./routes/professorRoute')
 const reviewRoute = require('./routes/reviewRoute')
@@ -20,46 +21,50 @@ const log = require('morgan');
 const cors = require('cors')
 const app = express()
 
+// Define a rate limiter to limit incoming requests
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, 
-  max: 1000, 
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 1000, // Maximum 1000 requests in the window
 });
 
 require('dotenv').config()
 
+// Set 'trust proxy' to 1 to trust the first proxy in the request chain
 app.set('trust proxy', 1);
 
-
-// app.use((req, res, next) => {
-//   if(req.header["X-Api-Key"] == process.env.API_KEY) next();
-//   else res.status(402).send()
-// })
-
+// Use helmet for enhanced security
 app.use(helmet());
+// Enable CORS for cross-origin requests
 app.use(cors());
+// Apply rate limiting to the app
 app.use(limiter);
 
+// Configure session management
 app.use(session({
   secret: process.env.SECRET,
   resave: true,
   saveUninitialized: false,
   cookie: {
-      maxAge: 1000 * 60 * 60 * 24, // 86400000 1 day
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
       httpOnly: true,
       secure: true
   },
   store: sessionStore
 }));
 
+// Initialize Passport for user authentication
 app.use(passport.initialize())
 app.use(passport.session())
+// Use Morgan for request logging
 app.use(log('dev'));
+// Parse incoming JSON requests
 app.use(bodyParser.json())
+// Parse cookies and use them
 app.use(cookieParser())
-//app.use(errorHandler);
-app.use(cookieParser(process.env.SECRET))
+// Log response time for each request
 app.use(responseTime());
 
+// Log incoming request details and response time
 app.use((req, res, next) => {
   const start = Date.now();
   const logData = {
@@ -86,8 +91,7 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
+// Handle errors and log them
 app.use((err, req, res, next) => {
   const logData = {
     method: req.method,
@@ -97,37 +101,15 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
+// Define routes for various parts of the application
 app.use('/signup', signupRoute)
 app.use('/login', loginRoute)
 app.use('/professors', professorRoute)
 app.use('/reviews', reviewRoute)
 app.use('/courses', courseRoute)
 
+// Define an authentication route
 app.get('/auth', checkAuthenticated)
 
-app.get('/auth/google/callback', (req, res, next) => {
-  // Use the 'google' strategy for authentication and handle the response
-  passport.authenticate('google', (err, user, info) => {
-    if (err) {
-      return res.status(500).json({ message: 'Authentication error' });
-    }
-
-    req.login(user, (loginErr) => {
-      if (loginErr) {
-        return res.status(500).json({ message: 'Error creating session for the new user' });
-      }
-      if (info && info.isNewUser) {
-        console.log("User:", user);
-        return res.status(201).json({ message: 'User created successfully and session created' });
-      } else {
-        console.log("User:", info.user);
-        return res.status(200).json({ message: 'Authentication successful' });
-      }
-    });
-  })(req, res, next);
-});
-
-
+// Export the Express app
 module.exports = app;
-
-

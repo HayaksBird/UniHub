@@ -1,18 +1,16 @@
-const bcrypt = require('bcrypt')
+// Import the bcrypt library for password hashing
+const bcrypt = require('bcrypt');
 
+// Function to generate a salt and hash for a given password
 const genSaltAndHash = async (password) => {
+  // Generate a salt with a factor of 6
   const salt = await bcrypt.genSalt(6);
+  // Generate a hash for the password using the generated salt
   const hash = await bcrypt.hash(password, salt);
-  return { salt, hash };
+  return { salt, hash }; // Return the salt and hash
 };
 
-const checkNotAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    res.status(403).send()
-  }
-  res.status(200).send()
-}
-
+// Function to check if the user is authenticated, and if so, return the user data
 const checkAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     const userInfo = {
@@ -20,12 +18,13 @@ const checkAuthenticated = (req, res, next) => {
       email: req.user.email
     };
 
-    res.status(200).json({ status: "User is authenticated", user: userInfo });
+    res.status(200).json({ status: "User is authenticated", user: userInfo }); // If authenticated, send user information
   } else {
-    res.status(403).json({ status: "User is not authenticated" });
+    res.status(403).json({ status: "User is not authenticated" }); // If not authenticated, send a forbidden status
   }
 };
 
+// Function to generate a random string for email confirmation
 const generateRandomString = () => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let randomString = '';
@@ -35,7 +34,8 @@ const generateRandomString = () => {
     randomString += characters.charAt(randomIndex);
   }
 
-  return randomString;
+  return randomString; // Return the generated random string
 }
 
-module.exports = { genSaltAndHash, checkAuthenticated, checkNotAuthenticated, generateRandomString }
+// Export the functions for use in the application
+module.exports = { genSaltAndHash, checkAuthenticated, generateRandomString };
