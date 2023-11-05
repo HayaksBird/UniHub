@@ -66,7 +66,6 @@ app.use(responseTime());
 
 // Log incoming request details and response time
 app.use((req, res, next) => {
-  const start = Date.now();
   const logData = {
     method: req.method,
     date: new Date(), 
