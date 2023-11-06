@@ -33,7 +33,7 @@ require('dotenv').config()
 app.set('trust proxy', 1);
 
 // Use helmet for enhanced security
-app.use(helmet());
+//app.use(helmet());
 // Enable CORS for cross-origin requests
 app.use(cors());
 // Apply rate limiting to the app
