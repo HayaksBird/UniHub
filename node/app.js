@@ -33,7 +33,7 @@ require('dotenv').config()
 app.set('trust proxy', 1);
 
 // Use helmet for enhanced security
-//app.use(helmet());
+app.use(helmet());
 // Enable CORS for cross-origin requests
 app.use(cors());
 // Apply rate limiting to the app
@@ -108,7 +108,7 @@ app.use('/reviews', reviewRoute)
 app.use('/courses', courseRoute)
 
 // Define an authentication route
-app.get('/auth', checkAuthenticated)
+app.post('/auth', checkAuthenticated)
 
 // Export the Express app
 module.exports = app;
