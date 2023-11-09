@@ -35,7 +35,10 @@ app.set('trust proxy', 1);
 // Use helmet for enhanced security
 app.use(helmet());
 // Enable CORS for cross-origin requests
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+}));
 // Apply rate limiting to the app
 app.use(limiter);
 
@@ -46,8 +49,9 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
       maxAge: 1000 * 60 * 60 * 24, // 1 day
+      sameSite: 'None',
       httpOnly: true,
-      secure: true
+      secure: false
   },
   store: sessionStore
 }));

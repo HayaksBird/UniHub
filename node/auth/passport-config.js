@@ -77,23 +77,17 @@ passport.generateAuthURL = function (req) {
 
 // Serialize and deserialize user data for session management
 passport.serializeUser((user, done) => {
+  console.log("serializing the user", user.id)
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
   try {
-
-    const rows = await findUserById(id);
-
-    if (rows.length === 0) {
-      return done(null, false);
-    }
-
-    const user = rows[0];
-    return done(null, user);
-
+      const user = await findUserById(id);
+      console.log("[popsopfsfefszfs")
+      return done(null, user);
   } catch (error) {
-    return done(error); // Error during user serialization/deserialization
+      return done(error);
   }
 });
 

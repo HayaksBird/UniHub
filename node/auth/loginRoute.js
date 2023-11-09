@@ -16,7 +16,7 @@ router.post('/', (req, res, next) => {
       return res.status(401).json({ message: 'Authentication failed' });
     }
 
-    req.login(user, (loginErr) => {
+    req.login({ id: user.id }, (loginErr) => {
       if (loginErr) {
         console.log("Error serializing user:", loginErr);
         return res.status(500).json({ message: 'An error occurred during login' });
