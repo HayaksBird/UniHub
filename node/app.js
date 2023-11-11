@@ -48,13 +48,14 @@ app.use(session({
   resave: true,
   saveUninitialized: false,
   cookie: {
-      maxAge: 1000 * 60 * 60 * 24, // 1 day
-      sameSite: 'None',
-      httpOnly: true,
-      secure: false
+    maxAge: 1000 * 60 * 60 * 24, // 1 day
+    sameSite: 'None',
+    httpOnly: true,
+    secure: false // Change this to false if testing over HTTP
   },
   store: sessionStore
 }));
+
 
 // Initialize Passport for user authentication
 app.use(passport.initialize())

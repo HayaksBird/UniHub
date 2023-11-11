@@ -78,12 +78,14 @@ passport.generateAuthURL = function (req) {
 // Serialize and deserialize user data for session management
 passport.serializeUser((user, done) => {
   console.log("serializing the user", user.id)
+  
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
   try {
       const user = await findUserById(id);
+      console.log(user)
       console.log("[popsopfsfefszfs")
       return done(null, user);
   } catch (error) {
