@@ -21,7 +21,7 @@ router.post('/', (req, res, next) => {
         console.log("Error serializing user:", loginErr);
         return res.status(500).json({ message: 'An error occurred during login' });
       }
-      console.log("Set-Cookie Header:", res.get('Set-Cookie'));
+      console.log("Set-Cookie Header:", res.get('Set-Cookie'), res.get('Set-Cookie'));
       return res.status(200).json({ message: 'Authentication successful', email: user.email });
     });
   })(req, res, next);
