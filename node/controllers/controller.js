@@ -12,11 +12,11 @@ const genSaltAndHash = async (password) => {
 
 // Function to check if the user is authenticated, and if so, return the user data
 const checkAuthenticated = (req, res, next) => {
-
   if (req.isAuthenticated()) {
-    res.status(200).json({ status: "User is authenticated", username: req.user.username, email: req.user.email }); // If authenticated, send user information
+    console.log(req.user)
+    res.status(200).send({ status: "User is authenticated", "username": req.user.username, "email": req.user.email }); // If authenticated, send user information
   } else {
-    res.status(401).json({ status: "User is not authenticated" }); // If not authenticated, send a forbidden status
+    res.status(202).send({ status: "User is not authenticated" }); // If not authenticated, send a forbidden status
   }
 };
 

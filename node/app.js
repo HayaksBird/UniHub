@@ -30,14 +30,17 @@ const limiter = rateLimit({
 require('dotenv').config()
 
 // Set 'trust proxy' to 1 to trust the first proxy in the request chain
-//app.set('trust proxy', 1);
+app.set('trust proxy', 1);
 
 // Use helmet for enhanced security
-//app.use(helmet());
+app.use(helmet());
 // Enable CORS for cross-origin requests
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true, // enable credentials (cookies)
+}));
 // Apply rate limiting to the app
-//app.use(limiter);
+app.use(limiter);
 
 // Configure session management
 app.use(session({
@@ -45,19 +48,13 @@ app.use(session({
   resave: true,
   saveUninitialized: false,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24, // 1 day
-    sameSite: 'None',
-    httpOnly: false,
-    secure: false // Change this to false if testing over HTTP
+    maxAge: 1000 * 60 * 60 * 24 * 30, // 1 day
+    sameSite: "none",
+    httpOnly: true,
+    secure: true, // Change this to false if testing over HTTP
   },
   store: sessionStore
 }));
-
-app.use((req, res, next) => {
-  console.log("Session Data:", req.session);
-  next();
-});
-
 // Initialize Passport for user authentication
 app.use(passport.initialize())
 app.use(passport.session())
@@ -114,7 +111,7 @@ app.use('/reviews', reviewRoute)
 app.use('/courses', courseRoute)
 
 // Define an authentication route
-app.get('/auth', checkAuthenticated)
+app.post('/auth', checkAuthenticated)
 
 // Export the Express app
 module.exports = app;
