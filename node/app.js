@@ -23,7 +23,7 @@ const app = express()
 
 // Define a rate limiter to limit incoming requests
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 60 * 1000, // 1 minute
   max: 1000, // Maximum 1000 requests in the window
 });
 
