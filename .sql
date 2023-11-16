@@ -5,6 +5,8 @@ DROP TABLE IF EXISTS review;
 DROP TABLE IF EXISTS course;
 DROP TABLE IF EXISTS professor;
 DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS sessions;
+
 
 CREATE TABLE IF NOT EXISTS user (
 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,6 +21,14 @@ confirmationCode VARCHAR(255),
 access_token VARCHAR(255),
 refresh_token VARCHAR(255)
 );
+
+CREATE TABLE IF NOT EXISTS sessions (
+  session_id VARCHAR(255) NOT NULL,
+  expires BIGINT NOT NULL,
+  data TEXT,
+  PRIMARY KEY (session_id)
+);
+
 
 CREATE TABLE IF NOT EXISTS professor (
 id INT AUTO_INCREMENT PRIMARY KEY,
