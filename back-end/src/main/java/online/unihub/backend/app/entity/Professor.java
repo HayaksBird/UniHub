@@ -38,9 +38,6 @@ public class Professor {
     private List<Review> reviews;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.REMOVE,
-            fetch = FetchType.LAZY)
-    @JoinColumn(name = "professor_id",
-            referencedColumnName = "id")
+    @ManyToMany(mappedBy = "professors")
     private List<Course> courses;
 }

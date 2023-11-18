@@ -27,9 +27,13 @@ public class ProfessorController {
     }
 
 
-    @GetMapping("/{fullName}")
-    public ResponseEntity<List<Professor>> getProfessor(@PathVariable String fullName) {
-        return new ResponseEntity<>(professorService.getProfessor(fullName), HttpStatus.OK);
+    @GetMapping("/{input}")
+    public ResponseEntity<List<Professor>> getProfessor(@PathVariable String input,
+                                                        @RequestParam(name = "byName") boolean byName) {
+        if (byName)
+            return new ResponseEntity<>(professorService.getProfessorsByName(input), HttpStatus.OK);
+        else
+            return new ResponseEntity<>(professorService.getProfessorsByCourse(input), HttpStatus.OK);
     }
 
 

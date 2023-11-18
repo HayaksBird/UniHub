@@ -32,8 +32,8 @@ public class Review {
     @Column(name = "user_id")
     private int userId;
 
-    @Column(name = "class")
-    private String reviewClass;
+    @Column(name = "course_id")
+    private int courseId;
 
     @Column(name = "created_at")
     private Timestamp timestamp;

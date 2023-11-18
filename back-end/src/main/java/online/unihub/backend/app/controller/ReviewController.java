@@ -28,8 +28,8 @@ public class ReviewController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Review> getReview(@PathVariable int id) {
-        return new ResponseEntity<>(reviewService.getReview(id), HttpStatus.OK);
+    public ResponseEntity<List<Review>> getReview(@PathVariable int id) {
+        return new ResponseEntity<>(reviewService.getProfessorsReviews(id), HttpStatus.OK);
     }
 
 

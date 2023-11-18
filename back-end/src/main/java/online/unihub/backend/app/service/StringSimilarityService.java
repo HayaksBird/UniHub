@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class StringSimilarityService {
-    private final int minOperationCount = 4;
+    private int minOperationCount;
 
 
     public boolean areSimilar(String word1, String word2) {
         int[][] matrix = new int[word2.length()][word1.length()];
+
+        setMinOperationCount(word1, word2);
 
         //set the initial point
         if (word1.charAt(0) != word2.charAt(0)) matrix[0][0] = 1;
@@ -73,5 +75,15 @@ public class StringSimilarityService {
 
             matrix[i][0] = matrix[i - 1][0] + flag;
         }
+    }
+
+
+    /**
+     *
+     */
+    private void setMinOperationCount(String word1, String word2) {
+        int minLen = Math.min(word1.length(), word2.length());
+
+        minOperationCount = (int)Math.sqrt(minLen);
     }
 }
