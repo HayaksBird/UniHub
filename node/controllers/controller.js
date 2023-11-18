@@ -25,6 +25,17 @@ const checkAuthenticated = (req, res, next) => {
   }
 };
 
+const logout = (req, res) => {
+  try{
+    req.logout((err) => {
+      console.log(err)
+    }); // Passport's logout function
+    res.status(200).send({ status: "Logged out successfully" });
+  } catch(err){
+    res.status(500).send({ status: "Error Loggin Out" });
+  }
+};
+
 // Function to generate a random string for email confirmation
 const generateRandomString = () => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -39,4 +50,4 @@ const generateRandomString = () => {
 }
 
 // Export the functions for use in the application
-module.exports = { genSaltAndHash, checkAuthenticated, generateRandomString };
+module.exports = { genSaltAndHash, checkAuthenticated, generateRandomString, logout };

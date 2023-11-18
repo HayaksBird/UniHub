@@ -1,6 +1,6 @@
 // Import necessary modules and functions
 const { addUser, isUserUnique, findUserByUsername, findUserById, getAllUsers, getAllProfessors, sessionStore } = require('./db/database')
-const { genSaltAndHash, checkAuthenticated } = require('./controllers/controller')
+const { genSaltAndHash, checkAuthenticated, logout } = require('./controllers/controller')
 const searchProfessors = require('./controllers/searchController')
 const professorRoute = require('./routes/professorRoute')
 const reviewRoute = require('./routes/reviewRoute')
@@ -36,8 +36,8 @@ app.set('trust proxy', 1);
 app.use(helmet());
 // Enable CORS for cross-origin requests
 app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true, // enable credentials (cookies)
+  origin: ['http://localhost:5173', 'http://localhost:4200', 'http://127.0.0.1:5500/test/index.html'],
+  credentials: true,
 }));
 // Apply rate limiting to the app
 app.use(limiter);
@@ -52,6 +52,7 @@ app.use(session({
     sameSite: "none",
     httpOnly: true,
     secure: true, // Change this to false if testing over HTTP
+    domain: ''
   },
   store: sessionStore
 }));
@@ -112,6 +113,10 @@ app.use('/courses', courseRoute)
 
 // Define an authentication route
 app.post('/auth', checkAuthenticated)
+
+//logout 
+app.use('/logout', logout)
+
 
 // Export the Express app
 module.exports = app;

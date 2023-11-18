@@ -32,24 +32,24 @@ router.get('/oauth2', passport.authenticate('google', { scope: ['profile', 'emai
 // Define the route for handling Google OAuth2 callback
 router.get('/google/callback', (req, res, next) => {
   passport.authenticate('google', (err, user, info) => {
+    console.log("I am in the callback");
     if (err) {
       return res.status(500).json({ message: 'Authentication error' });
     }
-
+    console.log("error has passed")
     req.login(user, (loginErr) => {
+      console.log("thw user in the session", user)
       if (loginErr) {
+        console.log("i am here")
         return res.status(500).json({ message: 'Error creating session for the new user' });
       }
-      if (info && info.isNewUser) {
-        console.log("User:", user);
-        return res.status(201).json({ message: 'User created successfully and session created' });
-      } else {
-        console.log("User:", info.user);
-        return res.status(200).json({ message: 'Authentication successful' });
-      }
+        return res.redirect(`http://localhost:5173/user?email=${user.email}`);
     });
   })(req, res, next);
 });
+
+
+
 
 // Export the router for use in the application
 module.exports = router;

@@ -33,14 +33,14 @@ passport.use(new LocalStrategy(
 
 // Configure a GoogleStrategy for OAuth2 authentication
 passport.use(new GoogleStrategy({
-  clientID: `179883402014-k6htcqa1fd005p8ask1s43akk1v2o2j5.apps.googleusercontent.com`,
-  clientSecret: `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`,
-  callbackURL: '/login/google/callback',
+  clientID: `179883402014-sdk4o1pm984p0sopilpmph9v0f21p9vq.apps.googleusercontent.com`,
+  clientSecret: `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`,
+  callbackURL: 'https://88ce-82-215-95-97.ngrok-free.app/login/google/callback',
   passReqToCallback: true,
 },
 async (req, accessToken, refreshToken, profile, done) => {
 
-  const email = profile.emails[0].value; //Get the email from OAuth2 cclient
+  const email = profile.emails[0].value;
   
   if (email.endsWith('@ku.edu.tr')) {
     try {
@@ -56,7 +56,7 @@ async (req, accessToken, refreshToken, profile, done) => {
         return done(null, newUser, { isNewUser: true });
       }
     } catch (error) {
-      return done(error); // Error during OAuth2 authentication
+      return done(error);
     }
   } else {
 
@@ -65,11 +65,11 @@ async (req, accessToken, refreshToken, profile, done) => {
   }
 }));
 
+
 // Define a function to generate the Google OAuth2 authentication URL
 passport.generateAuthURL = function (req) {
   const options = {
     scope: ['profile', 'email'],
-    prompt: 'select_account', // Force to select the Google account every time
   };
 
   return passport.authenticate('google', options)(req, null);
