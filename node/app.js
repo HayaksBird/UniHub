@@ -48,10 +48,10 @@ app.use(session({
   resave: true,
   saveUninitialized: false,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 30, // 1 day
+    maxAge: 1000 * 60 * 60 * 24 * 30 * 6 , // 6 months
     sameSite: "none",
     httpOnly: true,
-    secure: true, // Change this to false if testing over HTTP
+    secure: true, 
     domain: ''
   },
   store: sessionStore
