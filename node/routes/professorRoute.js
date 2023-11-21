@@ -48,9 +48,17 @@ router.get('/:name', async (req, res) => {
   try {
     // Extract the 'name' parameter from the URL
     const name = req.params.name;
+    const byName = req.query.byName || ''; // Extract the 'byName' query parameter
+
+    let apiUrl = `${process.env.SECOND_SERVER}/professors/${name}`;
+
+    // Append query parameter to the API URL if byName is provided and is either 'true' or 'false'
+    if (byName.toLowerCase() === 'true' || byName.toLowerCase() === 'false') {
+      apiUrl += `?byName=${byName.toLowerCase()}`;
+    }
 
     // Send a GET request to the second Java Spring server using Axios
-    const response = await axios.get(`${process.env.SECOND_SERVER}/professors/${name}`);
+    const response = await axios.get(apiUrl);
     // Set the response status and send the data from the external server
     res.status(response.status).json(response.data);
   } catch (error) {

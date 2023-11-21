@@ -64,5 +64,23 @@ router.get('/:Id', async (req, res) => {
   }
 });
 
+router.get('/last', async (req, res) => {
+  // Try to make a GET request to the second server to get a review by ID
+  try {
+    console.log("poop")
+    const response = await axios.get(`${process.env.SECOND_SERVER}/reviews/last`);
+    // If the request is successful, send the resposnse back to the client
+    res.status(response.status).json(response.data);
+  } catch (error) {
+    // If the request fails, handle the error accordingly
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    } else {
+      // If there is no response, handle the error accordingly
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+});
+
 // Export the router so that it can be used by other modules
 module.exports = router;

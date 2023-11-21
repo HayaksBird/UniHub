@@ -43,7 +43,7 @@ router.get('/google/callback', (req, res, next) => {
         console.log("i am here")
         return res.status(500).json({ message: 'Error creating session for the new user' });
       }
-        return res.redirect(`http://localhost:5173/user?email=${user.email}`);
+        return res.redirect(`https://rate-my-professor-alpha-smnv-shokh.vercel.app/`);
     });
   })(req, res, next);
 });

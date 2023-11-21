@@ -36,7 +36,7 @@ app.set('trust proxy', 1);
 app.use(helmet());
 // Enable CORS for cross-origin requests
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:4200', 'http://127.0.0.1:5500/test/index.html'],
+  origin: ['http://localhost:5173', 'http://localhost:4200', 'http://127.0.0.1:5500/test/index.html', 'https://rate-my-professor-alpha-smnv-shokh.vercel.app'],
   credentials: true,
 }));
 // Apply rate limiting to the app
@@ -52,7 +52,8 @@ app.use(session({
     sameSite: "none",
     httpOnly: true,
     secure: true, 
-    domain: ''
+    domain: ".vercel.app"
+
   },
   store: sessionStore
 }));
@@ -114,7 +115,7 @@ app.use('/courses', courseRoute)
 // Define an authentication route
 app.post('/auth', checkAuthenticated)
 
-//logout 
+// Define a logout route
 app.use('/logout', logout)
 
 
