@@ -1,12 +1,12 @@
-CREATE DATABASE IF NOT EXISTS uniHub;
-USE uniHub;
+CREATE DATABASE IF NOT EXISTS unihub;
+USE unihub;
 
+DROP TABLE IF EXISTS professor_course;
 DROP TABLE IF EXISTS review;
 DROP TABLE IF EXISTS course;
 DROP TABLE IF EXISTS professor;
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS sessions;
-
 
 CREATE TABLE IF NOT EXISTS user (
 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -23,12 +23,11 @@ refresh_token VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS sessions (
-  session_id VARCHAR(255) NOT NULL,
-  expires BIGINT NOT NULL,
-  data TEXT,
-  PRIMARY KEY (session_id)
+session_id VARCHAR(255) NOT NULL,
+expires BIGINT NOT NULL,
+data TEXT,
+PRIMARY KEY (session_id)
 );
-
 
 CREATE TABLE IF NOT EXISTS professor (
 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -39,9 +38,7 @@ photo_reference VARCHAR(255) DEFAULT 'default_photo.jpg'
 
 CREATE TABLE IF NOT EXISTS course (
 id INT AUTO_INCREMENT PRIMARY KEY,
-course_name VARCHAR(255) NOT NULL,
-professor_id INT,
-FOREIGN KEY (professor_id) REFERENCES professor(id)
+course_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS review (
@@ -54,6 +51,14 @@ course_id INT,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 FOREIGN KEY (professor_id) REFERENCES professor(id),
 FOREIGN KEY (user_id) REFERENCES user(id),
+FOREIGN KEY (course_id) REFERENCES course(id)
+);
+
+CREATE TABLE professor_course (
+professor_id INT,
+course_id INT,
+PRIMARY KEY (professor_id, course_id),
+FOREIGN KEY (professor_id) REFERENCES professor(id),
 FOREIGN KEY (course_id) REFERENCES course(id)
 );
 
@@ -74,16 +79,31 @@ INSERT INTO professor (full_name) VALUES ('Sarah Brown');
 INSERT INTO professor (full_name) VALUES ('Michael Davis');
 
 -- Insert statements for class_table
-INSERT INTO course (course_name, professor_id) VALUES ('MATH203', 1);
-INSERT INTO course (course_name, professor_id) VALUES ('CALC201', 1);
-INSERT INTO course (course_name, professor_id) VALUES ('PHYS101', 2);
-INSERT INTO course (course_name, professor_id) VALUES ('CHEM202', 2);
-INSERT INTO course (course_name, professor_id) VALUES ('CSCI301', 3);
-INSERT INTO course (course_name, professor_id) VALUES ('DAN101', 3);
-INSERT INTO course (course_name, professor_id) VALUES ('HIST301', 4);
-INSERT INTO course (course_name, professor_id) VALUES ('POLI202', 4);
-INSERT INTO course (course_name, professor_id) VALUES ('ENGL101', 5);
-INSERT INTO course (course_name, professor_id) VALUES ('LIT205', 5);
+INSERT INTO course (course_name) VALUES ('MATH203');
+INSERT INTO course (course_name) VALUES ('CALC201');
+INSERT INTO course (course_name) VALUES ('PHYS101');
+INSERT INTO course (course_name) VALUES ('CHEM202');
+INSERT INTO course (course_name) VALUES ('CSCI301');
+INSERT INTO course (course_name) VALUES ('DAN101');
+INSERT INTO course (course_name) VALUES ('HIST301');
+INSERT INTO course (course_name) VALUES ('POLI202');
+INSERT INTO course (course_name) VALUES ('ENGL101');
+INSERT INTO course (course_name) VALUES ('LIT205');
+
+-- Insert into join table
+INSERT INTO professor_course (professor_id, course_id)
+VALUES
+(1, 1),
+(1, 2),
+(2, 3),
+(2, 4),
+(3, 5),
+(3, 1),
+(3, 6),
+(4, 7),
+(4, 8),
+(5, 9),
+(5, 10);
 
 -- Insert statements for review_table
 INSERT INTO review (professor_id, review_text, rating, user_id, course_id) VALUES (1, 'Great professor!', 5, 1, 1);
