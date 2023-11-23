@@ -64,11 +64,11 @@ router.get('/:Id', async (req, res) => {
   }
 });
 
-router.get('/last', async (req, res) => {
+router.post('/last', async (req, res) => {
   // Try to make a GET request to the second server to get a review by ID
   try {
-    console.log("poop")
     const response = await axios.get(`${process.env.SECOND_SERVER}/reviews/last`);
+    console.log(response.data)
     // If the request is successful, send the resposnse back to the client
     res.status(response.status).json(response.data);
   } catch (error) {

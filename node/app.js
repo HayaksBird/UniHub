@@ -73,7 +73,7 @@ app.use(responseTime());
 app.use((req, res, next) => {
   const logData = {
     method: req.method,
-    date: new Date(), 
+    date: new Date(),
   };
 
   res.on('finish', () => {
