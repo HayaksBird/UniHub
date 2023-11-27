@@ -57,6 +57,7 @@
     "response-time": "^2.3.2",
     "session-memory-store": "^1.0.0",
     "smtp": "^0.1.4",
+    "validator": "^13.11.0",
     "winston": "^3.11.0"
   }
 }

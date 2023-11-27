@@ -4,12 +4,10 @@ require('dotenv').config();
 
 // Create a transporter for sending emails
 const transporter = nodemailer.createTransport({
-    service: 'Gmail', // Specify the email service provider (e.g., Gmail)
+    service: 'Mail.ru',
     auth: {
-        user: `${process.env.EMAIL}`, // Sender's email address
-        clientId: `${process.env.CLIENT_ID}`, // Client ID for authentication
-        clientSecret: `${process.env.CLIENT_SECRET}`, // Client Secret for authentication
-        pass: `${process.env.PASS}` // Sender's email password
+        user: `${process.env.EMAIL}`,
+        pass: `${process.env.PASS}`
     }
 });
 
