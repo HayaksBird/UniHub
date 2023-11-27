@@ -1,7 +1,6 @@
 // Import necessary modules and functions
-const { addUser, isUserUnique, findUserByUsername, findUserById, getAllUsers, getAllProfessors, sessionStore } = require('./db/database')
-const { genSaltAndHash, checkAuthenticated, logout } = require('./controllers/controller')
-const searchProfessors = require('./controllers/searchController')
+const { sessionStore } = require('./db/database')
+const { checkAuthenticated, logout } = require('./controllers/controller')
 const professorRoute = require('./routes/professorRoute')
 const reviewRoute = require('./routes/reviewRoute')
 const passport = require('./auth/passport-config')
@@ -11,7 +10,6 @@ const rateLimit = require("express-rate-limit");
 const courseRoute = require('./routes/courseRoute')
 const cookieParser = require('cookie-parser')
 const responseTime = require('response-time')
-const errorHandler = require('errorhandler')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const logger = require('./log/logger')
