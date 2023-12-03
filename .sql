@@ -33,7 +33,12 @@ CREATE TABLE IF NOT EXISTS professor (
 id INT AUTO_INCREMENT PRIMARY KEY,
 full_name VARCHAR(255),
 university VARCHAR(255) DEFAULT 'Koc University',
-photo_reference VARCHAR(255) DEFAULT 'default_photo.jpg'
+photo_reference VARCHAR(255) DEFAULT 'default_photo.jpg',
+rate_1 INT DEFAULT 0,
+rate_2 INT DEFAULT 0,
+rate_3 INT DEFAULT 0,
+rate_4 INT DEFAULT 0,
+rate_5 INT DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS course (
@@ -62,6 +67,26 @@ FOREIGN KEY (professor_id) REFERENCES professor(id),
 FOREIGN KEY (course_id) REFERENCES course(id)
 );
 
+-- Update professor's rating
+DELIMITER //
+
+CREATE TRIGGER update_professor_rating
+AFTER INSERT ON review
+FOR EACH ROW
+BEGIN
+UPDATE professor
+SET
+rate_1 = CASE WHEN NEW.rating = 1 THEN rate_1 + 1 ELSE rate_1 END,
+rate_2 = CASE WHEN NEW.rating = 2 THEN rate_2 + 1 ELSE rate_2 END,
+rate_3 = CASE WHEN NEW.rating = 3 THEN rate_3 + 1 ELSE rate_3 END,
+rate_4 = CASE WHEN NEW.rating = 4 THEN rate_4 + 1 ELSE rate_4 END,
+rate_5 = CASE WHEN NEW.rating = 5 THEN rate_5 + 1 ELSE rate_5 END
+WHERE id = NEW.professor_id;
+END;
+//
+
+DELIMITER ;
+
 -- Insert statements for user_table
 INSERT INTO user (username, email, password, salt, hash_algorithm, confirmationCode)
 VALUES
@@ -72,23 +97,26 @@ VALUES
 ('michael.davis', 'michael.davis@example.com', 'password5', 'salt5', 'SHA256', NULL);
 
 -- Insert statements for professor_table
-INSERT INTO professor (full_name) VALUES ('John Smith');
-INSERT INTO professor (full_name) VALUES ('Emily Johnson');
-INSERT INTO professor (full_name) VALUES ('David Williams');
-INSERT INTO professor (full_name) VALUES ('Sarah Brown');
-INSERT INTO professor (full_name) VALUES ('Michael Davis');
+INSERT INTO professor (full_name)
+VALUES ('John Smith'),
+('Emily Johnson'),
+('David Williams'),
+('Sarah Brown'),
+('Michael Davis'),
+('John Heisenberg');
 
 -- Insert statements for class_table
-INSERT INTO course (course_name) VALUES ('MATH203');
-INSERT INTO course (course_name) VALUES ('CALC201');
-INSERT INTO course (course_name) VALUES ('PHYS101');
-INSERT INTO course (course_name) VALUES ('CHEM202');
-INSERT INTO course (course_name) VALUES ('CSCI301');
-INSERT INTO course (course_name) VALUES ('DAN101');
-INSERT INTO course (course_name) VALUES ('HIST301');
-INSERT INTO course (course_name) VALUES ('POLI202');
-INSERT INTO course (course_name) VALUES ('ENGL101');
-INSERT INTO course (course_name) VALUES ('LIT205');
+INSERT INTO course (course_name)
+VALUES ('MATH203'),
+('CALC201'),
+('PHYS101'),
+('CHEM202'),
+('CSCI301'),
+('DAN101'),
+('HIST301'),
+('POLI202'),
+('ENGL101'),
+('LIT205');
 
 -- Insert into join table
 INSERT INTO professor_course (professor_id, course_id)
@@ -106,8 +134,9 @@ VALUES
 (5, 10);
 
 -- Insert statements for review_table
-INSERT INTO review (professor_id, review_text, rating, user_id, course_id) VALUES (1, 'Great professor!', 5, 1, 1);
-INSERT INTO review (professor_id, review_text, rating, user_id, course_id) VALUES (2, 'Awesome teacher!', 4, 2, 3);
-INSERT INTO review (professor_id, review_text, rating, user_id, course_id) VALUES (3, 'Very knowledgeable', 4, 3, 5);
-INSERT INTO review (professor_id, review_text, rating, user_id, course_id) VALUES (4, 'Passionate about the subject', 3, 4, 7);
-INSERT INTO review (professor_id, review_text, rating, user_id, course_id) VALUES (5, 'Engaging lectures', 5, 5, 9);
+INSERT INTO review (professor_id, review_text, rating, user_id, course_id)
+VALUES (1, 'Great professor!', 5, 1, 1),
+(2, 'Awesome teacher!', 4, 2, 3),
+(3, 'Very knowledgeable', 4, 3, 5),
+(4, 'Passionate about the subject', 3, 4, 7),
+(5, 'Engaging lectures', 5, 5, 9);
