@@ -44,7 +44,7 @@ router.delete('/:professorId', async (req, res) => {
 });
 
 // Define a route that handles GET requests with a 'name' parameter in the URL
-router.get('/:name', async (req, res) => {
+router.post('/:name', async (req, res) => {
   try {
     // Extract the 'name' parameter from the URL
     const name = req.params.name;

@@ -33,7 +33,8 @@ router.post('/', async (req, res, next) => {
     const { salt, hash } = await genSaltAndHash(password);
 
     try {
-      sendEmail(normalizedEmail, code);
+      // Send a confirmation email to the user (This part is currently commented out)
+      // axios.post(`${process.env.SECOND_SERVER}/auth`, emailData);
 
       // Add the user to the database
       await addUser(username, normalizedEmail, hash, salt, code);

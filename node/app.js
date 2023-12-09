@@ -20,26 +20,25 @@ const cors = require('cors')
 const app = express()
 
 // Define a rate limiter to limit incoming requests
-const limiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 1000, // Maximum 1000 requests in the window
-});
+// const limiter = rateLimit({
+//   windowMs: 60 * 1000, // 1 minute
+//   max: 1000, // Maximum 1000 requests in the window
+// });
 
 require('dotenv').config()
 
 // Set 'trust proxy' to 1 to trust the first proxy in the request chain
-app.set('trust proxy', 1);
+//app.set('trust proxy', 1);
 
 // Use helmet for enhanced security
 app.use(helmet());
 // Enable CORS for cross-origin requests
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:4200', 'http://127.0.0.1:5500/test/index.html', 'https://rate-my-professor-alpha-smnv-shokh.vercel.app'],
+  origin: 'https://rate-my-professor-alpha-smnv-shokh.vercel.app',
   credentials: true,
 }));
 // Apply rate limiting to the app
-app.use(limiter);
-
+//app.use(limiter);
 // Configure session management
 app.use(session({
   secret: process.env.SECRET,
@@ -49,9 +48,7 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24 * 30 * 6 , // 6 months
     sameSite: "none",
     httpOnly: true,
-    secure: true, 
-    domain: ".vercel.app"
-
+    secure: true,
   },
   store: sessionStore
 }));
