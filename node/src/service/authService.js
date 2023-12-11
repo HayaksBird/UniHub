@@ -15,10 +15,10 @@ const checkAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     const [user] = req.user
     console.log(user.username)
-    res.status(200).send({ 
-      status: "User is authenticated", 
-      username: user.username, 
-      email: user.email 
+    res.status(200).send({
+      status: "User is authenticated",
+      username: user.username,
+      email: user.email
     }); // If authenticated, send user information
   } else {
     res.status(202).send({ status: "User is not authenticated" }); // If not authenticated, send a forbidden status

@@ -2,7 +2,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-const { addUser, isUserUnique, findUserByUsername, findUserById, findUserByEmail, addOauth2User } = require('../../db/database');
+const { addUser, isUserUnique, findUserByUsername, findUserById, findUserByEmail, addOauth2User } = require('../service/mysqlService');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 // Configure a LocalStrategy for username and password authentication

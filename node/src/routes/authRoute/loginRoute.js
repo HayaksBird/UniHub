@@ -1,6 +1,6 @@
 // Import necessary modules and dependencies
 const express = require('express');
-const passport = require('./passport-config');
+const passport = require('../../config/passport-config');
 const router = express.Router();
 
 // Define the login route for local authentication
