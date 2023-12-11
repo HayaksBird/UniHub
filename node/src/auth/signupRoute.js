@@ -3,9 +3,9 @@ const express = require('express');
 const router = express.Router();
 const validator = require('validator');
 const axios = require('axios');
-const passport = require('./passport-config')
+const passport = require('../config/passport-config')
 const { generateRandomString } = require('../controllers/controller');
-const sendEmail = require('./nodeMailer-config');
+const sendEmail = require('../config/nodeMailer-config');
 const { addUser, isUserUnique } = require('../db/database');
 const { genSaltAndHash, checkAuthenticated } = require('../controllers/controller');
 require('dotenv').config();

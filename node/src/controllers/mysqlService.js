@@ -1,17 +1,7 @@
-// Import the necessary modules
-const mysql = require('mysql2/promise');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
-require('dotenv').config();
+const pool = require('../config/mysql-config');
 
-// Create a MySQL connection pool
-const pool = mysql.createPool({
-  host: process.env.HOST,
-  user: "root",
-  password: process.env.PASSWORD,
-  database: "uniHub",
-  connectionLimit: 10,
-});
 
 // Create a session store using MySQL for Express
 const sessionStore = new MySQLStore({ createDatabaseTable: true }, pool);
