@@ -4,10 +4,10 @@ const router = express.Router();
 const validator = require('validator');
 const axios = require('axios');
 const passport = require('../../config/passport-config')
-const { generateRandomString } = require('../controllers/controller');
+const { generateRandomString } = require('../../service/authService');
 const sendEmail = require('../../config/nodeMailer-config');
-const { addUser, isUserUnique } = require('../db/database');
-const { genSaltAndHash, checkAuthenticated } = require('../controllers/controller');
+const { addUser, isUserUnique } = require('../../service/mysqlService');
+const { genSaltAndHash, checkAuthenticated } = require('../../service/authService');
 require('dotenv').config();
 
 // Define a route to handle POST requests for user registration
