@@ -1,0 +1,6 @@
+.env
+node_modules
+.sql
+index.html
+app.log
+client

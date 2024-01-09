@@ -1,0 +1,63 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "backend for rating professors",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XT3RM1NATOR/UniHub.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XT3RM1NATOR/UniHub/issues"
+  },
+  "homepage": "https://github.com/XT3RM1NATOR/UniHub#readme",
+  "dependencies": {
+    "axios": "^1.5.1",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "debug": "^4.3.4",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "errorhandler": "^1.5.1",
+    "express": "^4.18.2",
+    "express-mysql-session": "^3.0.0",
+    "express-rate-limit": "^7.1.3",
+    "express-session": "^1.17.3",
+    "fs": "^0.0.1-security",
+    "googleapis": "^127.0.0",
+    "helmet": "^7.0.0",
+    "https": "^1.0.0",
+    "mailchimp-marketing": "^0.0.1-security",
+    "mailgun-js": "^0.22.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.6.1",
+    "next": "^13.5.6",
+    "nodemailer": "^6.9.6",
+    "nodemailer-smtp-transport": "^2.4.2",
+    "nodemon": "^3.0.1",
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "promice": "^0.0.2",
+    "promise": "^8.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1",
+    "redis": "^4.6.10",
+    "response-time": "^2.3.2",
+    "session-memory-store": "^1.0.0",
+    "smtp": "^0.1.4",
+    "validator": "^13.11.0",
+    "winston": "^3.11.0"
+  }
+}
