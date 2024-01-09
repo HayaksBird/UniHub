@@ -1,0 +1,29 @@
+.results-list{
+    width: 40%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    margin-top: .5rem;
+    max-height: 200px;
+    min-width: 350px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    flex-shrink: 0;
+    box-shadow: 0px 0px 8px #1f1f1f;
+}
+
+
+.results-list::-webkit-scrollbar {
+    width: 10px;
+}
+  
+.results-list::-webkit-scrollbar-thumb {
+    background: #AB162B;
+    border-radius: 10px;
+}
+
+.results-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+  
