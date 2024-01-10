@@ -33,9 +33,9 @@ passport.use(new LocalStrategy(
 
 // Configure a GoogleStrategy for OAuth2 authentication
 passport.use(new GoogleStrategy({
-  clientID: `179883402014-sdk4o1pm984p0sopilpmph9v0f21p9vq.apps.googleusercontent.com`,
-  clientSecret: `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`,
-  callbackURL: 'https://88ce-82-215-95-97.ngrok-free.app/login/google/callback',
+  clientID: ``,
+  clientSecret: ``,
+  callbackURL: ``,
   passReqToCallback: true,
 },
 async (req, accessToken, refreshToken, profile, done) => {
